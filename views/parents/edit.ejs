@@ -1,0 +1,104 @@
+<% layout('layouts/boilerplate') %> 
+
+<div class="row">
+
+    <h1 class="text-center">Edit Parent Information </h1>
+    <div class="col-6 offset-3">
+
+        <!-- Edit Parent Info -->
+        <form action="/students/<%= studentId %>/parents?_method=PUT" method="POST" class="needs-validation" id="parentForm" novalidate> 
+            <% let i = 1 %> 
+            <% for (let parent of parents) { %>
+                <h3 class="text-center">Parent Contact <%= i++ %> </h3>
+                <div class="row my-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" name="<%= parent._id %>[name][firstName]" id="parentFirstName" class="form-control" value="<%= parent.name.firstName %>" placeholder="First name" required>
+                            <label for="parentFirstName">Parent First Name</label>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a first name.</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" name="<%= parent._id %>[name][lastName]" id="parentLastName" class="form-control" value="<%= parent.name.lastName %>" placeholder="Last name" required>
+                            <label for="parentLastName">Parent Last name</label>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a last name.</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="<%= parent._id %>[name][koreanName]" id="parentKoreanName" class="form-control" value="<%= parent.name.koreanName %>" placeholder="Korean name (Optional)">
+                            <label for="parentKoreanName">Parent Korean (Optional)</label>
+                        </div>
+                        <!-- <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a Korean name.</div> -->
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="form-group">
+                        <div class="form-floating mb-3">
+                            <input type="email" name="<%= parent._id %>[email]" id="parentEmail" class="form-control" value="<%= parent.email %>" placeholder="name@example.com" required>
+                            <label for="parentEmail">Parent Email</label>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid email.</div>
+                        <div class="form-floating mb-3">
+                            <input type="number" name="<%= parent._id %>[phone]" id="parentPhone" class="form-control" value=<%= parent.phone %> placeholder="(123) 456 7890" required>
+                            <label for="parentPhone">Parent Phone</label>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid phone number</div>
+                        <small id="contactHelp" class="form-text text-muted">We'll never share your contact information with anyone else.</small>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">Is this parent a KCPC member?</div>
+                <div class="row mb-4 justify-content-md-center">
+                    <div class="col-md-auto text-center">
+                        <input type="radio" id="kcpcMember<%= parent._id %>" name="<%= parent._id %>[kcpcMember]" class="form-check-input mr-1" <%= parent.kcpcMember ? 'checked':''%> value='true'>
+                        <label for="kcpcMember<%= parent._id %>" class="radio-inline">Yes</label>
+                        <input type="radio" id="kcpcMember<%= parent._id %>false" name="<%= parent._id %>[kcpcMember]" class="form-check-input mr-1" <%= !parent.kcpcMember ? 'checked':''%> value='false'>
+                        <label for="kcpcMember<%= parent._id %>false" class="radio-inline">No</label>
+                    </div>
+                </div>
+            <% } %>
+            <!-- Button trigger modal -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-success" onclick="event.preventDefault();" style="background-color: #28a745; border-color: #28a745;" data-toggle="modal" data-target="#confirmModal">
+                    Submit
+                </button>
+                <a class="px-3" href="/students/<%= studentId %> ">Cancel</a>
+            </div>
+
+            <!-- Confirmation/Cancel buttons -->
+            <div class="text-center">
+                <!-- Modal -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Are you sure you want to make the changes?</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" style="background-color: #28a745; border-color: #28a745;" onsubmit="document.getElementById('parentForm').submit();">
+                                    Confirm
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <br>
+        </form>
+        <a href="/" class="mb-3">Back to Home</a>
+    </div>
+
+</div>

@@ -1,0 +1,163 @@
+<% layout('layouts/boilerplate') %> 
+
+<div class="row">
+
+    <h1 class="text-center">Edit Student Profile </h1>
+    <div class="col-6 offset-3">
+
+        <form action="/students/<%= student._id %>?_method=PUT" method="POST" id="studentForm" class="needs-validation" enctype="multipart/form-data" novalidate>
+            <!-- Edit Student Info -->
+            <fieldset>
+                <legend>Personal Information</legend>
+                <div class="row my-3">
+                    <div class="col">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input type="text" name="name[firstName]" id="firstName" class="form-control" value="<%= student.name.firstName %>" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a first name.</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="lastName" class="form-label">Last name</label>
+                        <input type="text" name="name[lastName]" id="lastName" class="form-control" value="<%= student.name.lastName %>" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a last name.</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="lastName" class="form-label">Korean name (Optional) </label>
+                        <input type="text" name="name[koreanName]" id="koreanName" class="form-control" value="<%= student.name.koreanName %>">
+                        <!-- <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a Korean name.</div> -->
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Profile Picture (Optional)</label>
+                    <input class="form-control" type="file" id="image" name="image">
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col d-flex" style="justify-content: center;">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" <%= student.gender === 'male' ? 'checked': '' %> >
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" <%= student.gender === 'female' ? 'checked': '' %>>
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="birthday" class="form-label">Date of Birth</label>
+                        <input type="date" name="birthday" id="birthday" class="form-control" min="1900-01-01" value=<%= student.birthdayYMD %> required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a birth date.</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="school" class="form-label">Name of Current School <i>(Optional)</i></label>
+                        <input type="text" name="school" id="school" class="form-control" value="<%= student.school %>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="medical" class="d-flex form-label">Medical Information</label>
+                        <textarea name="medicalInfo" rows="3" id="medical" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. any disability, special needs, allergies, diet restrictions, proneness to seizures, additional info"><%= student.medicalInfo %></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Behavioral Information:</legend>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="behavioral-likes" class="d-flex form-label">Likes</label>
+                        <textarea name="behavioral[likes]" rows="3" id="behavioral-likes" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. likes, favorite food, activities"><%= student.behavioral.likes %></textarea>
+                    </div>
+                    <div class="col">
+                        <label for="behavioral-dislikes" class="d-flex form-label">Dislikes</label>
+                        <textarea name="behavioral[dislikes]" rows="3" id="behavioral-dislikes" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. dislikes, triggers, fears"><%= student.behavioral.dislikes %></textarea>
+                    </div>
+                </div>
+
+                <div class="row mb-3 justify-content-md-center">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <label for="comprehension-eng" class="form-label">English Comprehension</label>
+                            <select class="form-select" name="behavioral[comprehension][english]" id="comprehension-eng">
+                                <option selected>Choose...</option>
+                                <% for (let i=1; i <= 5; i++ ) { %> 
+                                    <option value="<%= i %>" <%= student.comprehensionEng == i ? 'selected': '' %> ><%= i %> </option>
+                                <% } %> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <label for="comprehension-kor" class="form-label">Korean Comprehension</label>
+                            <select class="form-select" name="behavioral[comprehension][korean]" id="comprehension-kor">
+                                <option selected>Choose...</option>
+                                <% for (let i=1; i <= 5; i++ ) { %> 
+                                    <option value="<%= i %>" <%= student.comprehensionKor == i ? 'selected': '' %> ><%= i %> </option>
+                                <% } %> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Button trigger modal -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-success" onclick="event.preventDefault();" style="background-color: #28a745; border-color: #28a745;" data-toggle="modal" data-target="#confirmModal">
+                    Submit
+                </button>
+                <a class="px-3" href="/students/<%= student._id %> ">Cancel</a>
+            </div>
+            <!-- Confirmation/Cancel buttons -->
+            <div class="text-center">
+                <!-- Modal -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Are you sure you want to make the changes?</h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" style="background-color: #28a745; border-color: #28a745;" onsubmit="document.getElementById('studentForm').submit();">
+                                    Confirm
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        
+        <a href="/">Back to Home</a>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function(){   
+        $('.bulletify').keydown(function(e){
+            if(e.keyCode == 13){
+                var h= $('.bulletify').val();
+                $('.bulletify').val('');
+                $('.bulletify').val('•'+h);// put your ascii code for special character
+            }
+        });
+    });
+</script>

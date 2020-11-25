@@ -1,0 +1,209 @@
+<% layout('layouts/boilerplate') %> 
+
+<div class="row">
+
+    <h1 class="text-center">New Student </h1>
+    <div class="col-6 offset-3">
+
+        <form action="/students" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+            <!-- New Student Info -->
+            <fieldset>
+                <legend>Personal Information</legend>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" name="name[firstName]" id="firstName" class="form-control" placeholder="First Name" required>
+                            <label for="firstName" class="form-label">First name</label>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a first name.</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" name="name[lastName]" id="lastName" class="form-control" placeholder="Last Name" required>
+                            <label for="lastName" class="form-label">Last name</label>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a last name.</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="name[koreanName]" id="koreanName" class="form-control" placeholder="Korean Name" required>
+                            <label for="koreanName" class="form-label">Korean name</label>
+                        </div>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a Korean name.</div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Profile Picture (Optional)</label>
+                    <input class="form-control" type="file" id="image" name="image">
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col d-flex" style="justify-content: center;">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="birthday" class="form-label">Date of Birth</label>
+                        <input type="date" name="birthday" id="birthday" class="form-control" min="1900-01-01" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a birth date.</div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="school" id="school" class="form-control" placeholder="School">
+                            <label for="school" class="form-label">School <i>(Optional)</i></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="medical" class="d-flex form-label">Medical Info</label>
+                        <textarea name="medicalInfo" rows="3" id="medical" style="min-width: 100%;" placeholder="any disability, special needs, allergies, diet restrictions, proneness to seizures, additional info"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Behavioral Information:</legend>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="behavioral-likes" class="d-flex form-label">Likes</label>
+                        <textarea name="behavioral[likes]" rows="3" id="behavioral-likes" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. likes, favorite food, activities"></textarea>
+                    </div>
+                    <div class="col">
+                        <label for="behavioral-dislikes" class="d-flex form-label">Dislikes</label>
+                        <textarea name="behavioral[dislikes]" rows="3" id="behavioral-dislikes" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. dislikes, triggers, fears"></textarea>
+                    </div>
+                </div>
+                
+                <div class="row mb-3 justify-content-md-center">
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <label for="comprehension-eng" class="form-label">English Comprehension</label>
+                            <select class="form-select" name="behavioral[comprehension][english]" id="comprehension-eng">
+                                <option selected>Choose...</option>
+                                <% for (let i=1; i <= 5; i++ ) { %> 
+                                    <option value="<%= i %> "><%= i %> </option>
+                                <% } %> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <label for="comprehension-kor" class="form-label">Korean Comprehension</label>
+                            <select class="form-select" name="behavioral[comprehension][korean]" id="comprehension-kor">
+                                <option selected>Choose...</option>
+                                <% for (let i=1; i <= 5; i++ ) { %> 
+                                    <option value="<%= i %> "><%= i %> </option>
+                                <% } %> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            
+            <!-- New Parent Info -->
+            <div class="row my-3">
+                <div class="col">
+                    <h3 class="text-center">Parent Contact </h3>
+
+                    <div class="form-floating">
+                        <input type="text" name="parent[name][firstName]" id="parentFirstName" class="form-control" placeholder="First name" required>
+                        <label for="parentFirstName" class="form-label">Primary Parent First Name</label>
+                    </div>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a first name.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="text" name="parent[name][lastName]" id="parentLastName" class="form-control" placeholder="Last name" required>
+                        <label for="parentLastName" class="form-label">Primary Parent Last name</label>
+                    </div>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a last name.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input type="email" name="parent[email]" id="parentEmail" class="form-control" placeholder="name@example.com" required>
+                        <label for="parentEmail" class="form-label">Primary Parent Email</label>
+                    </div>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid email.</div>
+
+                    <label for="parentPhone" class="form-label">Primary Parent Phone</label>
+                    <input type="number" name="parent[phone]" id="parentPhone" class="form-control" placeholder="(123) 456 7890" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid phone number</div>
+                    <small id="contactHelp" class="form-text text-muted">We'll never share your contact information with anyone else.</small>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                Is this parent a KCPC member?
+            </div>
+            <div class="row mb-4 justify-content-md-center">
+                <div class="col-md-auto text-center">
+                    <input type="radio" id="kcpcMember" name="parent[kcpcMember]" class="form-check-input mr-1" value='true' required>
+                    <label for="kcpcMember" class="radio-inline">Yes</label>
+                    <input type="radio" id="kcpcMemberfalse" name="parent[kcpcMember]" class="form-check-input mr-1" value='false' required>
+                    <label for="kcpcMemberfalse" class="radio-inline">No</label>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" name="inputAddress" id="inputAddress" class="form-control" placeholder="1234 Main St">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" name="inputCity" id="inputCity" class="form-control" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <select name="inputState" id="inputState" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>...</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" name="inputZip" id="inputZip" class="form-control" >
+                </div>
+            </div> -->
+            <div class="row mb-4 justify-content-md-center">
+                <div class="col-md-auto text-center">
+                    <button type="submit" class="btn btn-success btn-lg" style="background-color: #28a745; border-color: #28a745;">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <br>
+        <a href="/students">Back to Students</a>
+        
+        <a href="/">Back to Home</a>
+    </div>
+
+</div>

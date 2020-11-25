@@ -1,0 +1,47 @@
+<% layout('layouts/boilerplate') %> 
+<% function calculateAge(birthday) {  // birthday is a date %>
+    <% const date1 = new Date(birthday) %> 
+    <% var ageDifMs = Date.now() - date1.getTime(); %>
+    <% var ageDate = new Date(ageDifMs);  // miliseconds from epoch %>
+    <% return Math.abs(ageDate.getUTCFullYear() - 1970); %>
+<% } %>
+
+<h1>Current Students</h1>
+
+<input type="button" class="btn btn-success my-3" style="background-color: #28a745; border-color: #28a745;" onclick="location.href='/students/new'" value="New Student" />
+
+<table class="table table-hover table-striped" id="studentTable">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">View/Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% let i = 1 %> 
+        <% for (let student of students) {%>
+            <tr>
+                <th scope="row"><%= i++ %> </th>
+                <td><%= student.fullName %></td>
+                <td><%= calculateAge(student.birthdayMDY) %></td>
+                <td>
+                    <a href="/students/<%= student._id %> ">View</a> / 
+                    <a href="/students/<%= student._id %>/edit">Edit</a>
+                </td>
+            </tr>
+        <% } %>  
+    </tbody>
+</table>
+
+<!-- <ol>
+    <% for (let student of students) { %> 
+        <li>
+            <%= student.fullName %> <a href="/students/<%= student._id %> ">view</a>
+        </li>
+    <% } %> 
+</ol> -->
+<br>
+<br>
+<a href="/">Back to Home</a>

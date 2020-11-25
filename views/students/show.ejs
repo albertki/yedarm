@@ -1,0 +1,209 @@
+<% layout('layouts/boilerplate') %> 
+
+<h5>Student Profile </h5>
+<br>
+<div class="row">
+
+
+    <div class="col-6">
+
+        <h2><%= student.fullName  %></h2>
+        <% if (student.name.koreanName) { %>
+            <h3><%= student.name.koreanName  %></h3>
+        <% } %> 
+        <h6>Gender: <%= student.gender %></h6>
+            <!-- <% if (student.gender === 'male') { %> 
+                <i class="fas fa-male"></i>
+            <% } else { %> 
+                <i class="fas fa-female"></i>
+            <% } %>  -->
+        <h6>Age: <%= calculateAge(student.birthdayMDY) %></h6>
+        <h6>Birthday: <%= student.birthdayMDY %></h6>
+        <h6>School: <%= student.school %></h6>
+        <h4>Medical Information:</h4>
+        <% if (student.medicalInfo) {%> 
+            <ul>
+                <% for (line of student.medicalInfo.split('\n')) { %> 
+                    <li><%= line.replace('\u2022', '') %> </li>
+                <% } %> 
+            </ul>
+        <% } %> 
+        <br>
+
+    </div>
+
+
+    <div class="col-6">
+        <div class="row mb-3">
+            <div class="col-7">
+                <img src="<%= student.image.url %> " width="100%" alt="studentImage">
+            </div>
+        </div>
+        <!-- <img src="/imgs/sample.jpg" class="py-4" alt=""> -->
+        <!-- <p>this is the student profile picture</p> -->
+        <h4>Behavioral Information</h4>
+        <div class="row">
+            <div class="col-2">
+                <h5>English:</h5>
+            </div>
+            <div class="col-1">
+                <%= student.behavioral.comprehension.english %> 
+            </div>
+            <div class="col-2 offset-1">
+                <h5>Korean:</h5>
+            </div>
+            <div class="col-1">
+                <%= student.behavioral.comprehension.korean  %> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <h5>Likes:</h5>
+                <% if (student.behavioral.likes) {%> 
+                    <ul>
+                        <% for (line of student.behavioral.likes.split('\n')) { %> 
+                            <li><%= line.replace('\u2022', '') %> </li>
+                        <% } %>
+                    </ul>
+                <% } %> 
+            </div>
+            <div class="col-2 offset-2">
+                <h5>Dislikes:</h5>
+                <% if (student.behavioral.dislikes) {%> 
+                    <ul>
+                        <% for (line of student.behavioral.dislikes.split('\n')) { %> 
+                            <li><%= line.replace('\u2022', '') %> </li>
+                        <% } %>
+                    </ul>
+                <% } %> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                <h5>Needs</h5>
+                <% if (student.behavioral.needs) {%> 
+                    <ul>
+                        <% for (line of student.behavioral.needs.split('\n')) { %> 
+                            <li><%= line.replace('\u2022', '') %> </li>
+                        <% } %>
+                    </ul>
+                <% } %>
+            </div>
+        </div>
+        <h5>Incidents:</h5>
+        <% if (student.incidents.length != 0) {%> 
+            <ul>
+                <% for (incident of student.incidents) { %> 
+                    <li><%= incident %> </li>
+                <% } %> 
+            </ul>
+        <% } %> 
+        <br>
+    
+    </div>
+
+</div>
+
+
+    <input type="button" class="btn btn-sm btn-info" onclick="location.href='/students/<%= student._id %>/edit'" value="Edit Student" />
+    <form class="d-inline" id="deleteStudentForm" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+        <!-- Button trigger modal -->
+        <button type="submit" class="btn btn-sm btn-danger" onclick="event.preventDefault();" data-toggle="modal" data-target="#confirmModal">
+            Delete
+        </button>
+        <!-- Confirmation/Cancel buttons -->
+        <!-- Modal -->
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Delete this student?</h5>
+                </div>
+                <div class="modal-body">
+                    <p>This student will be permanently deleted from the database.</p>
+                    <p>This <b>cannot</b> be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" onclick="document.getElementById('deleteStudentForm').submit();">
+                        Confirm
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </form>
+
+<br><br>
+<h4>Parent Contact</h4>
+<% if (student.parents.length != 0) {%>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+            <!-- <th scope="col">#</th> -->
+                <th scope="col">Korean Name</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">KCPC member?</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let parent of student.parents) {%>
+                <tr>
+                    <td><%= parent.name.koreanName %></td>
+                    <td><%= parent.fullName %></td>
+                    <td><%= parent.email %></td>
+                    <td><%= parent.phoneNumber %></td>
+                    <td>@mdo</td>
+                    <td><%= parent.kcpcMember %> </td>
+                    <td>
+                        <form class="d-inline" id="deleteParentForm" action="/students/<%= student._id %>/parents/<%= parent._id %>?_method=DELETE" method="POST">
+                            <!-- Button trigger modal -->
+
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="event.preventDefault();" data-toggle="modal" data-target="#confirmModal2">
+                                Delete
+                            </button>
+                            <!-- Confirmation/Cancel buttons -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmModal2" tabindex="-1" aria-labelledby="confirmModalLabel2" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmModalLabel2">Delete this parent?</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>This parent will be permanently deleted from the database.</p>
+                                        <p>This <b>cannot</b> be undone.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger" onclick="document.getElementById('deleteParentForm').submit();">
+                                            Confirm
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            <% } %>  
+        </tbody>
+    </table>
+    <input type="button" class="btn btn-sm btn-info" onclick="location.href='/students/<%= student._id %>/parents/edit'" value="Edit Parent(s)" />
+    
+<% } //else { %>  
+    <input type="button" class="btn btn-sm btn-success" onclick="location.href='/students/<%= student._id %>/parents/new'" value="Add Parent(s)" />
+<% //} %> 
+<br><br>
+<a href="/students">Back to Students</a>
+
+<a href="/">Back to Home</a>
