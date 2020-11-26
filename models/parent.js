@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
+const { login } = require('../controllers/users');
 const { Schema } = mongoose;
+
+const statesArray = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
 
 // Declare the Schema of the Mongo model
 var parentSchema = new Schema({
@@ -18,7 +21,22 @@ var parentSchema = new Schema({
         }
     },
     address: {
-        type: String
+        street: String,
+        city: {
+            type: String,
+            required: true
+        },
+        state: {
+            type: String,
+            uppercase: true,
+            enum: statesArray,
+            required: true
+        },
+        zip: {
+            type: String,
+            minlength: 5, maxlength: 5,
+            required: true
+        }
     },
     email: {
         type: String,
@@ -46,14 +64,24 @@ var parentSchema = new Schema({
     //     ref: 'Parent'
     // }
 });
+
 parentSchema.virtual('fullName')
     .get(function() {
+        console.log('hello');
         return this.name.firstName + ' ' + this.name.lastName;
     })
     .set(function(v) {
         this.name.firstName = v.substr(0, v.indexOf(' '));
         this.name.lastName = v.substr(v.indexOf(' ') + 1);
     });
+
+parentSchema.virtual('addressFull')
+    .get(function() {
+        if ('address' in this) {
+            return `${this.address.street}, ${this.address.city}, ${this.address.state}`;
+        }
+        return '';
+    })
 
 parentSchema.virtual('phoneNumber')
     .get(function() {
@@ -67,5 +95,6 @@ parentSchema.virtual('phoneNumber')
     // });
 
 //Export the model
-const Parent = mongoose.model('Parent', parentSchema);
-module.exports = Parent;
+module.exports.Parent = mongoose.model('Parent', parentSchema);
+
+module.exports.statesArray = statesArray

@@ -1,38 +1,13 @@
-body {
-    background-color: #f5f5f5;
+#loginPage {
+    height: 100vh;
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.338), rgba(0, 0, 0, 0.769)), url(https://images.unsplash.com/photo-1463320898484-cdee8141c787?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80); */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.447), rgba(62, 62, 62, 0.769)), url(https://images.unsplash.com/photo-1492944557828-11e576351057?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80);
+    background-size: cover;
+    background-position: center;
 }
-.signin {
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-}
-.form-signin .checkbox {
-    font-weight: 400;
-}
-.form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-}
-.form-signin .form-control:focus {
-    z-index: 2;
-}
-.form-signin input[type="text"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+/* #loginPage .navbar-brand {
+    font-weight: 450;
+} */
+#loginPage .nav-link:hover {
+    color: aliceblue;
 }

@@ -1,5 +1,5 @@
 const Student = require('../models/student');
-const Parent = require('../models/parent');
+const { Parent, statesArray } = require('../models/parent');
 const ExpressError = require('../utils/ExpressError');
 
 const calculateAge = require('../utils/calculateAge');
@@ -12,7 +12,7 @@ module.exports.index = async (req, res) => {
 }
 
 module.exports.renderNewStudentForm = (req, res) => {
-    res.render('students/new');
+    res.render('students/new', { statesArray });
 }
 
 module.exports.createStudent = async (req, res) => {
@@ -20,14 +20,17 @@ module.exports.createStudent = async (req, res) => {
     const parentInfo = req.body.parent;
     const parent = new Parent(parentInfo);
     delete req.body.parent;
-    if (isNaN(req.body.behavioral.comprehension.english)) req.body.behavioral.comprehension.english = null;
-    if (isNaN(req.body.behavioral.comprehension.korean)) req.body.behavioral.comprehension.korean = null;
+    // console.log(req.body);
+    if (req.body.kcpcMemberDate == '') delete req.body.kcpcMemberDate;  // null Date causes error...
     const newStudent = new Student(req.body);
-    newStudent.image = { url: req.file.path, filename: req.file.filename }
+    console.log(newStudent);
+    if (req.file) {
+        newStudent.image = { url: req.file.path, filename: req.file.filename }
+    }
     newStudent.parents.push(parent);
     await newStudent.save();
-    // console.log(newStudent);
     await parent.save();
+    // console.log(newStudent);
     req.flash('success', 'Successfully added a new student!')
     res.redirect(`/students/${newStudent._id}`);
 }
@@ -51,9 +54,6 @@ module.exports.renderEditForm = async (req, res) => {
 }
 module.exports.updateStudent = async (req, res) => {
     const studentId = req.params.id;
-    // default value is "Choose...", so.... just equate it to null..
-    if (isNaN(req.body.behavioral.comprehension.english)) req.body.behavioral.comprehension.english = null;
-    if (isNaN(req.body.behavioral.comprehension.korean)) req.body.behavioral.comprehension.korean = null;
     if (req.file) {
         req.body.image = { url: req.file.path, filename: req.file.filename }
     }

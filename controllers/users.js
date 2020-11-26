@@ -2,9 +2,9 @@ const User = require('../models/user');
 const ExpressError = require('../utils/ExpressError');
 
 
-module.exports.renderRegister = (req, res) => {
-    res.render('users/register');
-}
+// module.exports.renderRegister = (req, res) => {
+//     res.render('users/register');
+// }
 
 module.exports.register = async (req, res, next) => {
     try {

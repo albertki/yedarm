@@ -30,6 +30,7 @@ var studentSchema = new Schema({
     school: {
         type: String
     },
+    kcpcMemberDate: Date,
     medicalInfo: String,
     // {
     //     // disability, diet restrictions, allergies, seizures, special needs, addit. info
@@ -45,11 +46,11 @@ var studentSchema = new Schema({
     behavioral: {
         comprehension: {
             english: {
-                type: String
+                type: Number
                 // default: null
             },
             korean: {
-                type: String
+                type: Number
                 // default: null
             }
         },
@@ -82,16 +83,26 @@ var studentSchema = new Schema({
 });
 studentSchema.virtual('fullName')
     .get(function() {
-        return this.name.firstName + ' ' + this.name.lastName;
+        return `${this.name.firstName} ${this.name.lastName}`;
     })
     .set(function(v) {
         this.name.firstName = v.substr(0, v.indexOf(' '));
         this.name.lastName = v.substr(v.indexOf(' ') + 1);
     });
+studentSchema.virtual('kcpcMemberDateMDY')
+    .get(function() {
+        if (this.kcpcMemberDate)
+            return ('0' + (this.kcpcMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.kcpcMemberDate.getDate()).slice(-2) + '-' + this.kcpcMemberDate.getFullYear();
+        return
+    })
+studentSchema.virtual('kcpcMemberDateYMD')
+    .get(function() {
+        if (this.kcpcMemberDate)
+            return  this.kcpcMemberDate.getFullYear() + '-' + ('0' + (this.kcpcMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.kcpcMemberDate.getDate()).slice(-2);
+    })
 studentSchema.virtual('birthdayMDY')
     .get(function() {
-        // return (this.birthday.getMonth()+1)+'-'+this.birthday.getDate() +'-'+ this.birthday.getFullYear()
-        return ('0' + (this.birthday.getMonth()+1)).slice(-2) + '-' + ('0' + this.birthday.getDate()).slice(-2) + '-' +this.birthday.getFullYear();
+        return ('0' + (this.birthday.getMonth()+1)).slice(-2) + '-' + ('0' + this.birthday.getDate()).slice(-2) + '-' + this.birthday.getFullYear();
     })
 studentSchema.virtual('birthdayYMD')
     .get(function() {
@@ -120,7 +131,6 @@ studentSchema.virtual('comprehensionKor')
 
 studentSchema.post('findOneAndDelete', async function(student) {
     // console.log('POST-DELETE!!');
-    // console.log(student);
     // Deletes Parent(s) if the Student deleted
     // TODO: But what if a Parent has multiple Students?
     if (student.parents.length != 0) {

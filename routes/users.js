@@ -10,7 +10,7 @@ const { isLoggedIn, isAlreadyLoggedIn } = require('../middleware');
 
 
 router.route('/register')
-    .get(users.renderRegister)
+    // .get(users.renderRegister)
     .post(catchAsync(users.register));
 
 router.route('/login')

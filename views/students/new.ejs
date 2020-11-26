@@ -14,9 +14,9 @@
                         <div class="form-floating">
                             <input type="text" name="name[firstName]" id="firstName" class="form-control" placeholder="First Name" required>
                             <label for="firstName" class="form-label">First name</label>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please enter a first name.</div>
                         </div>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a first name.</div>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -24,9 +24,9 @@
                         <div class="form-floating">
                             <input type="text" name="name[lastName]" id="lastName" class="form-control" placeholder="Last Name" required>
                             <label for="lastName" class="form-label">Last name</label>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please enter a last name.</div>
                         </div>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a last name.</div>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -34,9 +34,9 @@
                         <div class="form-floating mb-3">
                             <input type="text" name="name[koreanName]" id="koreanName" class="form-control" placeholder="Korean Name" required>
                             <label for="koreanName" class="form-label">Korean name</label>
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please enter a Korean name.</div>
                         </div>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a Korean name.</div>
                     </div>
                 </div>
 
@@ -75,8 +75,16 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col">
+                        <label for="kcpcMemberDate" class="form-label">KCPC Member Since:</label>
+                        <input type="date" name="kcpcMemberDate" id="kcpcMemberDate" class="form-control" min="1920-01-01">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
                         <label for="medical" class="d-flex form-label">Medical Info</label>
-                        <textarea name="medicalInfo" rows="3" id="medical" style="min-width: 100%;" placeholder="any disability, special needs, allergies, diet restrictions, proneness to seizures, additional info"></textarea>
+                        <textarea name="medicalInfo" rows="3" id="medical" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. any disability, special needs, allergies, diet restrictions, proneness to seizures, additional info"></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -100,7 +108,7 @@
                         <div class="input-group mb-3">
                             <label for="comprehension-eng" class="form-label">English Comprehension</label>
                             <select class="form-select" name="behavioral[comprehension][english]" id="comprehension-eng">
-                                <option selected>Choose...</option>
+                                <option disabled selected value="">Choose...</option>
                                 <% for (let i=1; i <= 5; i++ ) { %> 
                                     <option value="<%= i %> "><%= i %> </option>
                                 <% } %> 
@@ -111,7 +119,7 @@
                         <div class="input-group mb-3">
                             <label for="comprehension-kor" class="form-label">Korean Comprehension</label>
                             <select class="form-select" name="behavioral[comprehension][korean]" id="comprehension-kor">
-                                <option selected>Choose...</option>
+                                <option disabled selected value="">Choose...</option>
                                 <% for (let i=1; i <= 5; i++ ) { %> 
                                     <option value="<%= i %> "><%= i %> </option>
                                 <% } %> 
@@ -130,9 +138,9 @@
                     <div class="form-floating">
                         <input type="text" name="parent[name][firstName]" id="parentFirstName" class="form-control" placeholder="First name" required>
                         <label for="parentFirstName" class="form-label">Primary Parent First Name</label>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a first name.</div>
                     </div>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a first name.</div>
                 </div>
             </div>
             <div class="row mb-3">
@@ -140,9 +148,9 @@
                     <div class="form-floating mb-3">
                         <input type="text" name="parent[name][lastName]" id="parentLastName" class="form-control" placeholder="Last name" required>
                         <label for="parentLastName" class="form-label">Primary Parent Last name</label>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a last name.</div>
                     </div>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a last name.</div>
                 </div>
             </div>
             <div class="row mb-3">
@@ -150,15 +158,15 @@
                     <div class="form-floating mb-3">
                         <input type="email" name="parent[email]" id="parentEmail" class="form-control" placeholder="name@example.com" required>
                         <label for="parentEmail" class="form-label">Primary Parent Email</label>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid email.</div>
                     </div>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a valid email.</div>
 
                     <label for="parentPhone" class="form-label">Primary Parent Phone</label>
                     <input type="number" name="parent[phone]" id="parentPhone" class="form-control" placeholder="(123) 456 7890" required>
                     <div class="valid-feedback">Looks good!</div>
                     <div class="invalid-feedback">Please enter a valid phone number</div>
-                    <small id="contactHelp" class="form-text text-muted">We'll never share your contact information with anyone else.</small>
+                    <small id="contactHelp" class="form-text text-muted">We'll never share the above information with anyone else.</small>
                 </div>
             </div>
             <div class="row justify-content-md-center">
@@ -172,27 +180,39 @@
                     <label for="kcpcMemberfalse" class="radio-inline">No</label>
                 </div>
             </div>
-            <!-- <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" name="inputAddress" id="inputAddress" class="form-control" placeholder="1234 Main St">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" name="inputCity" id="inputCity" class="form-control" >
+            <div class="row g-3 mb-3">
+
+                <div class="col-12">
+                    <label for="inputStreetAddress" class="form-label">Address</label>
+                    <input type="text" name="parent[address][street]" class="form-control" id="inputStreetAddress"
+                        placeholder="1234 Main St" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select name="inputState" id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">City</label>
+                    <input type="text" name="parent[address][city]" class="form-control" id="inputCity" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label">State</label>
+                    <select id="inputState" name="parent[address][state]" class="form-select" required>
+                        <option disabled selected value="">Choose...</option>
+                        <% for (let state of statesArray) { %>
+                            <option value="<%= state %>">
+                                <%= state %>
+                            </option>
+                        <% } %>
                     </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter the state.</div>
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" name="inputZip" id="inputZip" class="form-control" >
+                <div class="col-md-2">
+                    <label for="inputZip" class="form-label">Zip</label>
+                    <input type="text" name="parent[address][zip]" class="form-control" id="inputZip"
+                        maxlength="5" required>
                 </div>
-            </div> -->
+                <small id="contactHelp" class="form-text text-muted">We'll never share your contact information with
+                    anyone else. This information is for emergency contact purposes only.</small>
+            
+            </div>
             <div class="row mb-4 justify-content-md-center">
                 <div class="col-md-auto text-center">
                     <button type="submit" class="btn btn-success btn-lg" style="background-color: #28a745; border-color: #28a745;">Submit</button>
@@ -200,10 +220,12 @@
             </div>
         </form>
 
-        <br>
-        <a href="/students">Back to Students</a>
-        
-        <a href="/">Back to Home</a>
+        <br><br>
+        <div class="row d-inline">
+            <a href="/students">Back to Students</a>
+            <!-- <a href="/">Back to Home</a> -->
+        </div>
+        <br><br>
     </div>
 
 </div>

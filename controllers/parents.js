@@ -1,18 +1,18 @@
 const Student = require('../models/student');
-const Parent = require('../models/parent');
+const { Parent, statesArray } = require('../models/parent');
 const ExpressError = require('../utils/ExpressError');
 
 module.exports.renderNewParentForm = async (req, res) => {
     const studentId = req.params.id;
     await Student.findById(studentId);
-    res.render('parents/new', { studentId });
+    res.render('parents/new', { studentId, statesArray });
 }
 
 module.exports.createParent = async (req, res) => {
     const studentId = req.params.id;
     const student = await Student.findById(studentId);
     const newParent = new Parent(req.body);
-    console.log(newParent);
+    // console.log(newParent);
     student.parents.push(newParent);
     await newParent.save();
     await student.save();
@@ -32,18 +32,17 @@ module.exports.renderEditParentForm = async (req, res) => {
     if (parents.length == 0) {
         throw new ExpressError('Parent Information Not Found', 404);
     }
-    res.render('parents/edit', { studentId, parents });
+    res.render('parents/edit', { studentId, parents, statesArray });
 }
 
 module.exports.updateParent = async (req, res) => {
-    const studentId = req.params.id;
     const parentIds = Object.keys(req.body);
     console.log(req.body)
     for (let parentId of parentIds) {
         await Parent.findByIdAndUpdate(parentId, req.body[parentId], {runValidators: true, new: true});
     }
     req.flash('success', 'Successfully edited parent(s)!')
-    res.redirect(`/students/${studentId}`);
+    res.redirect(`/students/${req.params.id}`);
 }
 
 module.exports.deleteParent = async (req, res) => {

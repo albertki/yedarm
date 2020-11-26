@@ -54,7 +54,7 @@
                 <div class="row mb-3">
                     <div class="col">
                         <label for="birthday" class="form-label">Date of Birth</label>
-                        <input type="date" name="birthday" id="birthday" class="form-control" min="1900-01-01" value=<%= student.birthdayYMD %> required>
+                        <input type="date" name="birthday" id="birthday" class="form-control" min="1920-01-01" value=<%= student.birthdayYMD %> required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a birth date.</div>
                     </div>
@@ -67,9 +67,28 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col">
-                        <label for="medical" class="d-flex form-label">Medical Information</label>
+                        <label for="kcpcMemberDate" class="form-label">KCPC Member Since:</label>
+                        <input type="date" name="kcpcMemberDate" id="kcpcMemberDate" class="form-control" min="1920-01-01" value=<%= student.kcpcMemberDateYMD %>>
+                        <!-- <div class="valid-feedback">Looks good!</div> -->
+                        <!-- <div class="invalid-feedback">Please enter a birth date.</div> -->
+                    </div>
+                </div>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Medical Information:</legend>
+                <div class="row mb-3">
+                    <div class="col">
+                        <!-- <label for="medical" class="d-flex form-label">Medical Information</label> -->
                         <textarea name="medicalInfo" rows="3" id="medical" onkeyup="bulletify(event)" style="min-width: 100%;" 
-                            placeholder="i.e. any disability, special needs, allergies, diet restrictions, proneness to seizures, additional info"><%= student.medicalInfo %></textarea>
+                            placeholder="i.e. any disability, allergies, diet restrictions, proneness to seizures, etc."><%= student.medicalInfo %></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="needs" class="d-flex form-label">Special Needs</label>
+                        <textarea name="behavioral[needs]" rows="3" id="needs" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. any special needs of the student for accomodation purposes"><%= student.behavioral.needs %></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -88,24 +107,32 @@
                             placeholder="i.e. dislikes, triggers, fears"><%= student.behavioral.dislikes %></textarea>
                     </div>
                 </div>
-
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="pacification" class="d-flex form-label">Pacification instructions</label>
+                        <textarea name="behavioral[pacification]" rows="3" id="pacification" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. signs of escalation, best calming methods"><%= student.behavioral.pacification %></textarea>
+                    </div>
+                </div>
                 <div class="row mb-3 justify-content-md-center">
-                    <div class="col-4">
+                    <div class="col-lg-4">
                         <div class="input-group mb-3">
                             <label for="comprehension-eng" class="form-label">English Comprehension</label>
                             <select class="form-select" name="behavioral[comprehension][english]" id="comprehension-eng">
-                                <option selected>Choose...</option>
+                                <option disabled selected value="">Choose...</option>
                                 <% for (let i=1; i <= 5; i++ ) { %> 
-                                    <option value="<%= i %>" <%= student.comprehensionEng == i ? 'selected': '' %> ><%= i %> </option>
+                                    <option value="<%= i %>" <%= student.comprehensionEng == i ? 'selected': '' %> >
+                                        <%= i %>
+                                    </option>
                                 <% } %> 
                             </select>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4">
                         <div class="input-group mb-3">
                             <label for="comprehension-kor" class="form-label">Korean Comprehension</label>
                             <select class="form-select" name="behavioral[comprehension][korean]" id="comprehension-kor">
-                                <option selected>Choose...</option>
+                                <option disabled selected value="">Choose...</option>
                                 <% for (let i=1; i <= 5; i++ ) { %> 
                                     <option value="<%= i %>" <%= student.comprehensionKor == i ? 'selected': '' %> ><%= i %> </option>
                                 <% } %> 
@@ -113,6 +140,7 @@
                         </div>
                     </div>
                 </div>
+
             </fieldset>
 
             <!-- Button trigger modal -->
@@ -144,20 +172,12 @@
                 </div>
             </div>
         </form>
-        <br>
-        
-        <a href="/">Back to Home</a>
+        <br><br>
+        <div class="row d-inline">
+            <a href="/students">Back to Students</a>
+            <!-- <a href="/">Back to Home</a> -->
+        </div>
+        <br><br>
     </div>
 
 </div>
-<script>
-    $(document).ready(function(){   
-        $('.bulletify').keydown(function(e){
-            if(e.keyCode == 13){
-                var h= $('.bulletify').val();
-                $('.bulletify').val('');
-                $('.bulletify').val('•'+h);// put your ascii code for special character
-            }
-        });
-    });
-</script>

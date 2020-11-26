@@ -12,9 +12,9 @@
                     <div class="form-floating">
                         <input type="text" name="name[firstName]" id="parentFirstName" class="form-control" placeholder="First name" required>
                         <label for="parentFirstName" class="form-label">Parent First Name</label>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a first name.</div>
                     </div>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a first name.</div>
                 </div>
             </div>
             <div class="row mb-3">
@@ -22,9 +22,9 @@
                     <div class="form-floating">
                         <input type="text" name="name[lastName]" id="parentLastName" class="form-control" placeholder="Last name" required>
                         <label for="parentLastName" class="form-label">Parent Last name</label>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a last name.</div>
                     </div>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a last name.</div>
                 </div>
             </div>
             <div class="row mb-3">
@@ -32,9 +32,9 @@
                     <div class="form-floating mb-3">
                         <input type="text" name="name[koreanName]" id="parentKoreanName" class="form-control" placeholder="Korean name">
                         <label for="parentKoreanName" class="form-label">Parent Korean name (Optional)</label>
+                        <!-- <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a Korean name.</div> -->
                     </div>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a Korean name.</div>
                 </div>
             </div>
             
@@ -43,38 +43,50 @@
                     <div class="form-floating mb-3">
                         <input type="email" name="email" id="parentEmail" class="form-control" placeholder="name@example.com" required>
                         <label for="parentEmail" class="form-label">Parent Email</label>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid email.</div>
                     </div>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a valid email.</div>
 
                     <label for="parentPhone" class="form-label">Parent Phone</label>
                     <input type="number" name="phone" id="parentPhone" class="form-control" placeholder="(123) 456 7890" required>
                     <div class="valid-feedback">Looks good!</div>
                     <div class="invalid-feedback">Please enter a valid phone number</div>
-                    <small id="contactHelp" class="form-text text-muted">We'll never share your contact information with anyone else.</small>
                 </div>
             </div>
-            <!-- <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" name="inputAddress" id="inputAddress" class="form-control" placeholder="1234 Main St">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" name="inputCity" id="inputCity" class="form-control" >
+            <div class="row g-3 mb-3">
+
+                <div class="col-12">
+                    <label for="inputStreetAddress" class="form-label">Address</label>
+                    <input type="text" name="address[street]" class="form-control" id="inputStreetAddress"
+                        placeholder="1234 Main St" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select name="inputState" id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">City</label>
+                    <input type="text" name="address[city]" class="form-control" id="inputCity" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label">State</label>
+                    <select id="inputState" name="address[state]" class="form-select" required>
+                        <option disabled selected value="">Choose...</option>
+                        <% for (let state of statesArray) { %>
+                            <option value="<%= state %>">
+                                <%= state %>
+                            </option>
+                        <% } %>
                     </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter the state.</div>
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" name="inputZip" id="inputZip" class="form-control" >
+                <div class="col-md-2">
+                    <label for="inputZip" class="form-label">Zip</label>
+                    <input type="text" name="address[zip]" class="form-control" id="inputZip"
+                        maxlength="5" required>
                 </div>
-            </div> -->
+                <small id="contactHelp" class="form-text text-muted">We'll never share your contact information with
+                    anyone else. This information is for emergency contact purposes only.</small>
+            
+            </div>
+            
             <div class="row justify-content-md-center">Is this parent a KCPC member?</div>
             <div class="row mb-4 justify-content-md-center">
                 <div class="col-md-auto text-center">
@@ -87,9 +99,11 @@
             <button type="submit" class="btn btn-success" style="background-color: #28a745; border-color: #28a745;">Submit</button>
         </form>
 
-        <br>
+        <br><br>
         <a href="/students/<%= studentId %>">Back to Student Profile</a>
         <a href="/students">Back to Students</a>
+        <br><br>
+
     </div>
 
 </div>
