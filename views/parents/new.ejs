@@ -7,37 +7,16 @@
 
         <form action="/students/<%= studentId %>/parents/new" method="POST" class="needs-validation" id="parentForm" novalidate> 
             <!-- New Parent Info -->
-            <div class="row my-3">
-                <div class="col">
-                    <div class="form-floating">
-                        <input type="text" name="name[firstName]" id="parentFirstName" class="form-control" placeholder="First name" required>
-                        <label for="parentFirstName" class="form-label">Parent First Name</label>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a first name.</div>
-                    </div>
-                </div>
-            </div>
             <div class="row mb-3">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="name[lastName]" id="parentLastName" class="form-control" placeholder="Last name" required>
-                        <label for="parentLastName" class="form-label">Parent Last name</label>
+                        <input type="text" name="name" id="parentName" class="form-control" placeholder="Full name" required>
+                        <label for="parentName" class="form-label">Parent Full name</label>
                         <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a last name.</div>
+                        <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="name[koreanName]" id="parentKoreanName" class="form-control" placeholder="Korean name">
-                        <label for="parentKoreanName" class="form-label">Parent Korean name (Optional)</label>
-                        <!-- <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a Korean name.</div> -->
-                    </div>
-                </div>
-            </div>
-            
             <div class="row mb-3">
                 <div class="form-group">
                     <div class="form-floating mb-3">

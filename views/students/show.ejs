@@ -90,6 +90,18 @@
                 <% } %>
             </div>
         </div>
+        <div class="row">
+            <div class="col-auto">
+                <h5>Pacification:</h5>
+                <% if (student.behavioral.pacification) {%> 
+                    <ul>
+                        <% for (line of student.behavioral.pacification.split('\n')) { %> 
+                            <li><%= line.replace('\u2022', '') %> </li>
+                        <% } %>
+                    </ul>
+                <% } %>
+            </div>
+        </div>
         <h5>Incidents:</h5>
         <% if (student.incidents.length != 0) {%> 
             <ul>
@@ -144,7 +156,6 @@
         <thead>
             <tr>
             <!-- <th scope="col">#</th> -->
-                <th scope="col">Korean</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
@@ -156,8 +167,7 @@
         <tbody>
             <% for (let parent of student.parents) {%>
                 <tr>
-                    <td><%= parent.name.koreanName %></td>
-                    <td><%= parent.fullName %></td>
+                    <td><%= parent.name %></td>
                     <td><%= parent.email %></td>
                     <td><%= parent.phoneNumber %></td>
                     <td><%= parent.addressFull %></td>

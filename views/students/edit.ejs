@@ -114,6 +114,13 @@
                             placeholder="i.e. signs of escalation, best calming methods"><%= student.behavioral.pacification %></textarea>
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="incidents" class="d-flex form-label">Past incidents</label>
+                        <textarea name="behavioral[incidents]" rows="3" id="incidents" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder=""><%= student.behavioral.incidents %></textarea>
+                    </div>
+                </div>
                 <div class="row mb-3 justify-content-md-center">
                     <div class="col-lg-4">
                         <div class="input-group mb-3">

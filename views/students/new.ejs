@@ -79,15 +79,25 @@
                         <input type="date" name="kcpcMemberDate" id="kcpcMemberDate" class="form-control" min="1920-01-01">
                     </div>
                 </div>
-
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>Medical Information:</legend>
                 <div class="row mb-3">
                     <div class="col">
-                        <label for="medical" class="d-flex form-label">Medical Info</label>
                         <textarea name="medicalInfo" rows="3" id="medical" onkeyup="bulletify(event)" style="min-width: 100%;" 
                             placeholder="i.e. any disability, special needs, allergies, diet restrictions, proneness to seizures, additional info"></textarea>
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="needs" class="d-flex form-label">Special Needs</label>
+                        <textarea name="behavioral[needs]" rows="3" id="needs" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. any special needs of the student for accomodation purposes"></textarea>
+                    </div>
+                </div>
             </fieldset>
+
             <fieldset>
                 <legend>Behavioral Information:</legend>
                 <div class="row mb-3">
@@ -102,7 +112,13 @@
                             placeholder="i.e. dislikes, triggers, fears"></textarea>
                     </div>
                 </div>
-                
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="pacification" class="d-flex form-label">Pacification instructions</label>
+                        <textarea name="behavioral[pacification]" rows="3" id="pacification" onkeyup="bulletify(event)" style="min-width: 100%;" 
+                            placeholder="i.e. signs of escalation, best calming methods"></textarea>
+                    </div>
+                </div>
                 <div class="row mb-3 justify-content-md-center">
                     <div class="col-4">
                         <div class="input-group mb-3">
@@ -136,20 +152,10 @@
                     <h3 class="text-center">Parent Contact </h3>
 
                     <div class="form-floating">
-                        <input type="text" name="parent[name][firstName]" id="parentFirstName" class="form-control" placeholder="First name" required>
-                        <label for="parentFirstName" class="form-label">Primary Parent First Name</label>
+                        <input type="text" name="parent[name]" id="parentName" class="form-control" placeholder="Full name" required>
+                        <label for="parentName" class="form-label">Primary Parent Name</label>
                         <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a first name.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="parent[name][lastName]" id="parentLastName" class="form-control" placeholder="Last name" required>
-                        <label for="parentLastName" class="form-label">Primary Parent Last name</label>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a last name.</div>
+                        <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                 </div>
             </div>

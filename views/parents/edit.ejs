@@ -14,35 +14,12 @@
             <div class="row my-3">
                 <div class="col">
                     <div class="form-floating">
-                        <input type="text" name="<%= parent._id %>[name][firstName]" id="parentFirstName"
-                            class="form-control" value="<%= parent.name.firstName %>" placeholder="First name" required>
-                        <label for="parentFirstName">Parent First Name</label>
+                        <input type="text" name="<%= parent._id %>[name]" id="parentName"
+                            class="form-control" value="<%= parent.name %>" placeholder="Full name" required>
+                        <label for="parentName">Parent Full Name</label>
                         <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a first name.</div>
+                        <div class="invalid-feedback">Please enter a name.</div>
                     </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="form-floating">
-                        <input type="text" name="<%= parent._id %>[name][lastName]" id="parentLastName"
-                            class="form-control" value="<%= parent.name.lastName %>" placeholder="Last name" required>
-                        <label for="parentLastName">Parent Last name</label>
-                        <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a last name.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="form-floating mb-3">
-                        <input type="text" name="<%= parent._id %>[name][koreanName]" id="parentKoreanName"
-                            class="form-control" value="<%= parent.name.koreanName %>"
-                            placeholder="Korean name (Optional)">
-                        <label for="parentKoreanName">Parent Korean (Optional)</label>
-                    </div>
-                    <!-- <div class="valid-feedback">Looks good!</div>
-                        <div class="invalid-feedback">Please enter a Korean name.</div> -->
                 </div>
             </div>
             <div class="row mb-3">
@@ -69,11 +46,11 @@
                 <div class="col-12">
                     <label for="inputStreetAddress" class="form-label">Address</label>
                     <input type="text" name="<%= parent._id %>[address][street]" class="form-control" id="inputStreetAddress"
-                        placeholder="1234 Main St" required>
+                        placeholder="1234 Main St" value="<%= parent.address.street %>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
-                    <input type="text" name="<%= parent._id %>[address][city]" class="form-control" id="inputCity" required>
+                    <input type="text" name="<%= parent._id %>[address][city]" class="form-control" id="inputCity" value="<%= parent.address.city %>" required>
                 </div>
                 <div class="col-md-4">
                     <label for="inputState" class="form-label">State</label>
@@ -91,7 +68,7 @@
                 <div class="col-md-2">
                     <label for="inputZip" class="form-label">Zip</label>
                     <input type="text" name="<%= parent._id %>[address][zip]" class="form-control" id="inputZip"
-                        maxlength="5" required>
+                        maxlength="5" value="<%= parent.address.zip %>" required>
                 </div>
                 <small id="contactHelp" class="form-text text-muted">We'll never share your contact information with
                     anyone else. This information is for emergency contact purposes only.</small>

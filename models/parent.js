@@ -6,19 +6,21 @@ const statesArray = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL",
 
 // Declare the Schema of the Mongo model
 var parentSchema = new Schema({
-    name:{
-        firstName: {
-            type: String,
-            required: [true, 'name cannot be blank']
-        },
-        lastName: {
-            type: String,
-            required: [true, 'name cannot be blank']
-        },
-        koreanName: {
-            type: String
+    name: {
+        type: String,
+        required: [true, 'name cannot be blank']
+        // firstName: {
+        //     type: String,
+        //     required: [true, 'name cannot be blank']
+        // },
+        // lastName: {
+        //     type: String,
+        //     required: [true, 'name cannot be blank']
+        // },
+        // koreanName: {
+        //     type: String
             // required: [true, 'name cannot be blank']
-        }
+        // }
     },
     address: {
         street: String,
@@ -65,15 +67,15 @@ var parentSchema = new Schema({
     // }
 });
 
-parentSchema.virtual('fullName')
-    .get(function() {
-        console.log('hello');
-        return this.name.firstName + ' ' + this.name.lastName;
-    })
-    .set(function(v) {
-        this.name.firstName = v.substr(0, v.indexOf(' '));
-        this.name.lastName = v.substr(v.indexOf(' ') + 1);
-    });
+// parentSchema.virtual('fullName')
+//     .get(function() {
+//         console.log('hello');
+//         return this.name.firstName + ' ' + this.name.lastName;
+//     })
+//     .set(function(v) {
+//         this.name.firstName = v.substr(0, v.indexOf(' '));
+//         this.name.lastName = v.substr(v.indexOf(' ') + 1);
+//     });
 
 parentSchema.virtual('addressFull')
     .get(function() {
