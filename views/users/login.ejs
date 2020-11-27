@@ -55,7 +55,7 @@
             <div class="row">
                 <div class="col-md-6 col-xl-4" style="width: 20rem;">
 
-                    <div class="card shadow px-3 py-3" style="width: 20rem;">
+                    <div class="card shadow px-3 py-3">
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Login</a>
@@ -137,6 +137,86 @@
                                 </div>
 
                             </div>
+                            <!-- <a href="/changepassword">Change password</a> -->
+                            <br>
+                            <!-- Change password -->
+                            <!-- Button trigger modal -->
+                            <div style="text-align: right;">
+                                <a href="" data-toggle="modal" data-target="#confirmModal">
+                                    Change password?
+                                </a>
+                            </div>
+                            <!-- Confirmation/Cancel buttons -->
+                            <!-- <div class="text-center"> -->
+                                <!-- Modal -->
+                                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content mx-auto" style="width: 20rem;">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="confirmModalLabel">Change your password</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <!-- <div class="col-md-4">.col-md-4</div> -->
+                                                        <div class="col">
+                                                            <form action="/changepassword" id="changepassword" method="POST" class="needs-validation signin" novalidate>
+                                                                <div class="mb-3">
+                                                                    <label for="username" class="form-label">Username</label>
+                                                                    <input id="username" class="form-control" name="username" type="text" autofocus required>
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please enter a username.
+                                                                    </div>
+                                                                </div>
+                                        
+                                                                <div class="mb-3">
+                                                                    <label for="email" class="form-label">Email</label>
+                                                                    <input type="email" id="email" class="form-control" name="email" required>
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please enter an email.
+                                                                    </div>
+                                                                </div>
+                                        
+                                                                <div class="mb-3">
+                                                                    <label for="password" class="form-label">Old password</label>
+                                                                    <input type="password" id="password" class="form-control" name="password" required>
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please enter your old password.
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="newPassword" class="form-label">New password</label>
+                                                                    <input type="password" id="newPassword" class="form-control" name="newPassword" required>
+                                                                    <div class="valid-feedback">Looks good!</div>
+                                                                    <div class="invalid-feedback">
+                                                                        Please enter a new password.
+                                                                    </div>
+                                                                </div>
+                                                            <!-- </form> -->
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Cancel
+                                                </button>
+                                                <button type="submit" class="btn btn-success" style="background-color: #28a745; border-color: #28a745;" onsubmit="document.getElementById('changepassword').submit();">
+                                                    Change password
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
 
                         </div>
                     </div>
@@ -144,13 +224,14 @@
             </div>
         </div>
     </main>
-    <footer class="footer mt-auto py-3 bg-light">
+    <footer class="footer mt-auto py-3">
         <div class="container">
-            <span class="text-muted">&copy Albert K 2020.</span>
+            <span class="text-dark">&copy Albert K 2020.</span>
         </div>
     </footer>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-popRpmFF9JQgExhfw5tZT4I9/CI5e2QcuUZPOVXb1m7qUmeR2b50u+YFEYe1wgzy" crossorigin="anonymous"></script>
+    <script src="/scripts/validateForms.js"></script>
     
     <script>
         $('#pills-tab a').on('click', function (e) {

@@ -39,3 +39,12 @@ module.exports.logout = (req, res) => {
     req.flash('success', 'Goodbye!');
     res.redirect('/login')
 }
+
+module.exports.changepassword = async (req, res) => {
+    console.log(req.body);
+    
+    const foundUser = await User.findById(req.user._id);
+    await foundUser.changePassword(req.body.password, req.body.newPassword);
+    console.log('password changed');
+    res.redirect('/login');
+}

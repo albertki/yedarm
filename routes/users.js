@@ -15,8 +15,14 @@ router.route('/register')
 
 router.route('/login')
     .get(isAlreadyLoggedIn, users.renderLogin)
-    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login'})
-        , users.login);
+    .post(passport.authenticate('local', 
+        { failureFlash: true, failureRedirect: '/login'}
+        ), users.login);
+
+router.route('/changepassword')
+    .post(passport.authenticate('local', 
+        { failureFlash: true, failureRedirect: '/login'}
+        ), catchAsync(users.changepassword));
 
 router.get('/logout', isLoggedIn, users.logout)
 
