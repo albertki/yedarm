@@ -24,6 +24,8 @@ router.route('/changepassword')
         { failureFlash: true, failureRedirect: '/login'}
         ), catchAsync(users.changepassword));
 
-router.get('/logout', isLoggedIn, users.logout)
+router.post('/changepassword', catchAsync(users.changepassword));
+
+router.get('/logout', isLoggedIn, users.logout);
 
 module.exports = router;
