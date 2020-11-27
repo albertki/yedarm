@@ -19,10 +19,10 @@ router.route('/login')
         { failureFlash: true, failureRedirect: '/login'}
         ), users.login);
 
-router.route('/changepassword')
-    .post(passport.authenticate('local', 
-        { failureFlash: true, failureRedirect: '/login'}
-        ), catchAsync(users.changepassword));
+// router.route('/changepassword')
+//     .post(passport.authenticate('local', 
+//         { failureFlash: true, failureRedirect: '/login'}
+//         ), catchAsync(users.changepassword));
 
 router.post('/changepassword', catchAsync(users.changepassword));
 
