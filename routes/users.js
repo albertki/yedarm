@@ -24,9 +24,9 @@ router.route('/login')
 //         { failureFlash: true, failureRedirect: '/login'}
 //         ), catchAsync(users.changepassword));
 
-router.post('/changepassword', passport.authenticate('local', 
-        { failureFlash: true, failureRedirect: '/login'}
-        ), catchAsync(users.changepassword));
+// router.post('/changepassword', passport.authenticate('local', 
+//         { failureFlash: true, failureRedirect: '/login'}
+//         ), catchAsync(users.changepassword));
 
 router.get('/logout', isLoggedIn, users.logout);
 
