@@ -70,7 +70,8 @@ const sessionConfig = {
     cookie: {
         httpOnly: true,
         // secure: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        // expires: Date.now() + 1000 * 60 * 60 * 24 * 7,  // 1 week
+        expires: Date.now() + 1000 * 60 * 60 * 24,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
