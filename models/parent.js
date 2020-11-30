@@ -97,6 +97,8 @@ parentSchema.virtual('phoneNumber')
     // });
 
 //Export the model
-module.exports.Parent = mongoose.model('Parent', parentSchema);
+const Parent = mongoose.model('Parent', parentSchema);
 
+const x = async () => await Parent.syncIndexes();
+module.exports.Parent = Parent;
 module.exports.statesArray = statesArray

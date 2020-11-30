@@ -38,6 +38,15 @@
                     <label for="formFile" class="form-label">Profile Picture (Optional)</label>
                     <input class="form-control" type="file" id="image" name="image">
                 </div>
+                <div class="mb-3">
+                    <% if (student.image.url) { %> 
+                        <img src="<%= student.image.url %>" class="img-thumbnail" style="max-width: 30%;" alt="">
+                        <div class="form-check-inline ml-3">
+                            <label for="deleteImage">Delete</label>
+                            <input type="checkbox" name="deleteImage" id="deleteImage" value="<%= student.image.filename %> ">
+                        </div>
+                    <% } %> 
+                </div>
 
                 <div class="row mb-3">
                     <div class="col d-flex" style="justify-content: center;">

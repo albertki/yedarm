@@ -1,6 +1,7 @@
 const Student = require('../models/student');
 const { Parent, statesArray } = require('../models/parent');
 const ExpressError = require('../utils/ExpressError');
+const { cloudinary } = require('../cloudinary')
 
 const calculateAge = require('../utils/calculateAge');
 const bulletify = require('../utils/bulletify');
@@ -57,8 +58,11 @@ module.exports.updateStudent = async (req, res) => {
     if (req.file) {
         req.body.image = { url: req.file.path, filename: req.file.filename }
     }
-    await Student.findByIdAndUpdate(studentId, req.body, {runValidators: true, new: true});
-    // console.log(modStudent)
+    const student = await Student.findByIdAndUpdate(studentId, req.body, {runValidators: true, new: true});
+    if (req.body.deleteImage) {
+        cloudinary.uploader.destroy(req.body.deleteImage);
+        await student.updateOne({$unset: { image: ""}})
+    }
     req.flash('success', 'Successfully edited a student!');
     res.redirect(`/students/${studentId}`);
 }

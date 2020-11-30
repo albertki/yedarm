@@ -36,11 +36,13 @@
 
 
     <div class="col-6">
-        <div class="row mb-3">
-            <div class="col-7">
-                <img src="<%= student.image.url %> " width="200vh" alt="studentImage">
+        <% if (student.image.url) { %> 
+            <div class="row mb-3">
+                <div class="col-7">
+                    <img src="<%= student.image.url %> " width="200vh" alt="studentImage">
+                </div>
             </div>
-        </div>
+        <% } %> 
         <!-- <img src="/imgs/sample.jpg" class="py-4" alt=""> -->
         <!-- <p>this is the student profile picture</p> -->
         <h3>Behavioral Information</h3>

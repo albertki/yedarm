@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Student = require('../models/student');
-const Parent = require('../models/parent');
+const {Parent} = require('../models/parent');
 
 // Connect MongoDB at default port 27017.
 mongoose.connect('mongodb://localhost:27017/yedarm', {
@@ -16,8 +16,8 @@ mongoose.connect('mongodb://localhost:27017/yedarm', {
 });
 
 const clearDB = async () => {
-    await Student.deleteMany({})
-    await Parent.deleteMany({})
+    await Student.deleteMany({});
+    await Parent.deleteMany({});
 };
 
 firstNames = ["Shooter", "Chubbs", "Happy", "Virginia", "Albert", "Steve", "Elton", "Amy", "Reese", "Zooey", "Veronica", "Angelina", "Brad", "Kevin", "Adam", "Joe", "Marshall", "Kevin", "Robert", "John", "Michael", "Moe", "Homer", "Bart", "Lisa", "Marge", "Seymour", "Peter", "Eric", "Stan", "Randy", "Tré"]
@@ -37,11 +37,11 @@ const seedDB = async () => {
                 lastName: lastNames[i]
             },
             birthday: `1998-${Math.floor(Math.random() * (12 - 1) + 1)}-${Math.floor(Math.random() * (30 - 1) + 1)}`,
-            gender: 'female',
-            image: {
-                url: 'https://res.cloudinary.com/de7x3ykky/image/upload/v1606248604/yedarm/gosl69xv9desxjmmqqoz.jpg',
-                filename: 'yedarm/gosl69xv9desxjmmqqoz'
-            }
+            gender: 'female'
+            // image: {
+            //     url: 'https://res.cloudinary.com/de7x3ykky/image/upload/v1606248604/yedarm/gosl69xv9desxjmmqqoz.jpg',
+            //     filename: 'yedarm/gosl69xv9desxjmmqqoz'
+            // }
             // ,image: "https://source.unsplash.com/600x400/?animals"
         })
     }
@@ -51,22 +51,28 @@ const seedDB = async () => {
     };  // for positive integers
 
     const parent1 = await Parent.create({
-        name: {
-            firstName: 'Diana',
-            lastName: 'Chang'
-        },
+        name: 'Diana Kim',
         birthday: `1948-${Math.floor(Math.random() * (12 - 1) + 1)}-${Math.floor(Math.random() * (30 - 1) + 1)}`,
         email: emails[0],
-        phone: String(randomPhone)
+        phone: String(randomPhone),
+        address: {
+            street: "124 Main St",
+            city: "Fairfax",
+            state: "VA",
+            zip: 20120
+        }
     })
     const parent2 = await Parent.create({
-        name: {
-            firstName: 'Dong',
-            lastName: 'Kim'
-        },
+        name: 'Dong Kim',
         birthday: `1938-${Math.floor(Math.random() * (12 - 1) + 1)}-${Math.floor(Math.random() * (30 - 1) + 1)}`,
         email: emails[3],
-        phone: "1234445967"
+        phone: "1234445967",
+        address: {
+            street: "124 Main St",
+            city: "Fairfax",
+            state: "VA",
+            zip: 20120
+        }
     })
     await Student.create({
         name: {
@@ -76,11 +82,11 @@ const seedDB = async () => {
         birthday: `1998-${Math.floor(Math.random() * (12 - 1) + 1)}-${Math.floor(Math.random() * (30 - 1) + 1)}`,
         gender: 'male',
         school: 'Centerville High',
-        parents: [parent1._id, parent2._id],
-        image: {
-            url: 'https://res.cloudinary.com/de7x3ykky/image/upload/v1606248604/yedarm/gosl69xv9desxjmmqqoz.jpg',
-            filename: 'yedarm/gosl69xv9desxjmmqqoz'
-        }
+        parents: [parent1._id, parent2._id]
+        // image: {
+        //     url: 'https://res.cloudinary.com/de7x3ykky/image/upload/v1606248604/yedarm/gosl69xv9desxjmmqqoz.jpg',
+        //     filename: 'yedarm/gosl69xv9desxjmmqqoz'
+        // }
         // ,image: "https://source.unsplash.com/600x400/?animals"
     })
 }
