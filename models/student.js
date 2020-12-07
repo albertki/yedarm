@@ -30,7 +30,7 @@ var studentSchema = new Schema({
     school: {
         type: String
     },
-    kcpcMemberDate: Date,
+    yedarmMemberDate: Date,
     medicalInfo: String,
     // {
     //     // disability, diet restrictions, allergies, seizures, special needs, addit. info
@@ -89,16 +89,16 @@ studentSchema.virtual('fullName')
         this.name.firstName = v.substr(0, v.indexOf(' '));
         this.name.lastName = v.substr(v.indexOf(' ') + 1);
     });
-studentSchema.virtual('kcpcMemberDateMDY')
+studentSchema.virtual('yedarmMemberDateMDY')
     .get(function() {
-        if (this.kcpcMemberDate)
-            return ('0' + (this.kcpcMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.kcpcMemberDate.getDate()).slice(-2) + '-' + this.kcpcMemberDate.getFullYear();
+        if (this.yedarmMemberDate)
+            return ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.yedarmMemberDate.getDate()).slice(-2) + '-' + this.yedarmMemberDate.getFullYear();
         return
     })
-studentSchema.virtual('kcpcMemberDateYMD')
+studentSchema.virtual('yedarmMemberDateYMD')
     .get(function() {
-        if (this.kcpcMemberDate)
-            return  this.kcpcMemberDate.getFullYear() + '-' + ('0' + (this.kcpcMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.kcpcMemberDate.getDate()).slice(-2);
+        if (this.yedarmMemberDate)
+            return  this.yedarmMemberDate.getFullYear() + '-' + ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.yedarmMemberDate.getDate()).slice(-2);
     })
 studentSchema.virtual('birthdayMDY')
     .get(function() {

@@ -24,7 +24,7 @@ router.get('/new', isLoggedIn, isAdmin, students.renderNewStudentForm)
 router.route('/:id')
     // GET route to view specific student
     .get(isLoggedIn, isAdmin, catchAsync(students.renderStudent))
-    // POST route to UPDATE student
+    // PUT route to UPDATE student
     .put(isLoggedIn, isAdmin, upload.single('image'), catchAsync(students.updateStudent))
     // DELETE route to DELETE student
     .delete(isLoggedIn, isAdmin, catchAsync(students.deleteStudent))

@@ -1,25 +1,37 @@
 <!-- success flash -->
-<% if (success && success.length != 0) { %> 
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-
-        <%= success %> 
-    </div>
+<% if (success && success.length != 0) { %>
+    <% for (msg of success) { %>  
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+            <%= msg %> 
+        </div>
+    <% } %> 
 <% } %> 
 
 <!-- warning flash -->
 <% if (warning && warning.length != 0) { %> 
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-
-        <%= warning %> 
-    </div>
+    <% for (msg of warning) { %>  
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+            <%= msg %> 
+        </div>
+    <% } %> 
 <% } %> 
 <!-- error flash -->
 <% if (error && error.length != 0) { %> 
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-
-        <%= error %> 
-    </div>
+    <% for (msg of error) { %>  
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+            <%= msg %> 
+        </div>
+    <% } %> 
+<% } %> 
+<!-- info flash -->
+<% if (info && info.length != 0) { %> 
+    <% for (msg of info) { %>  
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+            <%= msg %> 
+        </div>
+    <% } %> 
 <% } %> 

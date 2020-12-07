@@ -20,7 +20,7 @@
         <h6>Age: <%= calculateAge(student.birthdayMDY) %></h6>
         <h6>Birthday: <%= student.birthdayMDY %></h6>
         <h6>School: <%= student.school %></h6>
-        <h6>KCPC Member Since: <%= student.kcpcMemberDateMDY %></h6>
+        <h6>Yedarm Member Since: <%= student.yedarmMemberDateMDY %></h6>
         <br><br>
         <h4>Medical Information:</h4>
         <% if (student.medicalInfo) {%> 
@@ -40,6 +40,12 @@
             <div class="row mb-3">
                 <div class="col-7">
                     <img src="<%= student.image.url %> " width="200vh" alt="studentImage">
+                </div>
+            </div>
+        <% } else { %> 
+            <div class="row mb-3">
+                <div class="col-7">
+                    <img src="<%= "https://res.cloudinary.com/de7x3ykky/image/upload/v1607293003/yedarm/default_profile_pic.png" %> " width="200vh" alt="studentImage">
                 </div>
             </div>
         <% } %> 

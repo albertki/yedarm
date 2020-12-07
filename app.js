@@ -137,6 +137,7 @@ app.use((req, res, next) => {
     res.locals.success = req.flash('success');
     res.locals.warning = req.flash('warning');
     res.locals.error = req.flash('error');
+    res.locals.info = req.flash('info');
     next();
 });
 
@@ -155,13 +156,13 @@ app.all('*', (req, res, next) => {
 
 app.use((err, req, res, next) => {
     const { status = 500 } = err;
-    if (!err.message) err.message = "Something went wrong!"
+    if (!err.message) err.message = "Something went wrong!";
     console.log(err.message);
     // res.send('Something went wrong')
-    res.status(status).render('error', {err})
+    res.status(status).render('error', {err});
 })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Serving on port ${port}!`);
 })
