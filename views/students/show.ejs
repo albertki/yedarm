@@ -125,36 +125,36 @@
 </div>
 
 
-    <input type="button" class="btn btn btn-info" onclick="location.href='/students/<%= student._id %>/edit'" value="Edit Student" />
-    <form class="d-inline" id="deleteStudentForm" action="/students/<%= student._id %>?_method=DELETE" method="POST">
-        <!-- Button trigger modal -->
-        <button type="submit" class="btn btn btn-danger" onclick="event.preventDefault();" data-toggle="modal" data-target="#confirmModal">
-            Delete
-        </button>
-        <!-- Confirmation/Cancel buttons -->
-        <!-- Modal -->
-        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmModalLabel">Delete this student?</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p>This student will be permanently deleted from the database.</p>
-                        <p>This <b>cannot</b> be undone.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger" onclick="document.getElementById('deleteStudentForm').submit();">
-                            Confirm
-                        </button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Cancel
-                        </button>
-                    </div>
+<input type="button" class="btn btn btn-info" onclick="location.href='/students/<%= student._id %>/edit'" value="Edit Student" />
+<form class="d-inline" id="deleteStudentForm" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+    <!-- Button trigger modal -->
+    <button type="submit" class="btn btn btn-danger" onclick="event.preventDefault();" data-toggle="modal" data-target="#confirmModal">
+        Delete
+    </button>
+    <!-- Confirmation/Cancel buttons -->
+    <!-- Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Delete this student?</h5>
+                </div>
+                <div class="modal-body">
+                    <p>This student will be permanently deleted from the database.</p>
+                    <p>This <b>cannot</b> be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" onclick="document.getElementById('deleteStudentForm').submit();">
+                        Confirm
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 
 <br><br>
 <h4>Parent Contact</h4>

@@ -3,11 +3,10 @@ const router = express.Router();
 const passport = require('passport');
 const users = require('../controllers/users');
 var xoauth2 = require('xoauth2');
-const multer  = require('multer')
 
-require('dotenv').config();
+
 const catchAsync = require('../utils/catchAsync');
-const { isLoggedIn, isAlreadyLoggedIn } = require('../middleware');
+const { isLoggedIn, isAlreadyLoggedIn, isAdmin } = require('../middleware');
 
 router.route('/register')
     // .get(users.renderRegister)
@@ -35,5 +34,7 @@ router.route('/forgot')
 router.route('/reset/:token')
     .get(users.renderResetPassword)
     .put(catchAsync(users.resetPassword));
+
+// router.get('/changeUsers', isLoggedIn, isAdmin, catchAsync(users.changeUsers));
 
 module.exports = router;

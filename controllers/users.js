@@ -3,7 +3,7 @@ const ExpressError = require('../utils/ExpressError');
 const async = require('async');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-
+require('dotenv').config();
 
 // module.exports.renderRegister = (req, res) => {
 //     res.render('users/register');
@@ -156,3 +156,9 @@ module.exports.resetPassword = async (req, res) => {
             res.redirect('login');
         });
 }
+
+module.exports.changeUsers = async (req, res) => {
+    const users = await User.find();
+    res.render('users/changeUsers', { users })
+}
+

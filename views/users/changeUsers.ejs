@@ -1,0 +1,104 @@
+<% layout('layouts/boilerplate') %> 
+
+<div class="login-page container d-flex justify-content-center align-items-center mt-5">
+
+<div class="row">
+    
+    <div class="col-md-6 col-xl-4" style="width: 50rem;">
+        <h1>Modify User Privileges</h1>
+        <br>
+        <table class="table table-hover table-striped" id="userTable">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Admin</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let i = 1 %> 
+                <% for (let user of users) {%>
+                    <tr>
+                        <th scope="row"><%= i++ %> </th>
+                        <td><%= user.username %></td>
+                        <td>
+                            <% if (!user.admin) { %> 
+                                <form action="/user/<%= user._id %>?_method=PUT" method="POST" class="d-inline needs-validation" id="makeAdminForm" novalidate>
+                                    <!-- Button trigger modal -->
+                                    <button type="submit" class="btn btn-sm btn-info" onclick="event.preventDefault();" data-toggle="modal" data-target="#adminModal">
+                                        Make Admin
+                                    </button>
+                                    <!-- Confirmation/Cancel buttons -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="adminModal" tabindex="-1" aria-labelledby="adminModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="adminModalLabel">Make this user an admin?</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>This user account will become an <b>admin</b> account, granting <b>access</b>, <b>modification</b>, and <b>deletion privileges</b> for the student database.</p>
+                                                    <p>It is <b>strongly</b> recommended that this users is deemed <b>entitled</b> to admin privileges, given the <b>sensitivity and confidentiality</b> of the data.</p>
+                                                    
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="terms" value="<%= true %> " required>
+                                                        <label class="form-check-label" for="terms">I agree to uphold the confidentiality of the data, and agree to keep any disclosed data private to myself</label>
+                                                        <div class="valid-feedback">Looks good!</div>
+                                                        <div class="invalid-feedback">Please agree to the terms.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger" onclick="document.getElementById('makeAdminForm').submit();">
+                                                        Confirm
+                                                    </button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            <% } %> 
+                        </td>
+                        <td>
+                            <!-- <a href="/user/<%= user._id %> ">View</a> /  -->
+                            <!-- <a href="/user/<%= user._id %>/edit">Edit</a> -->
+                            <form class="d-inline" id="deleteUserForm" action="/user/<%= user._id %>?_method=DELETE" method="POST">
+                                <!-- Button trigger modal -->
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="event.preventDefault();" data-toggle="modal" data-target="#confirmModal">
+                                    Delete
+                                </button>
+                                <!-- Confirmation/Cancel buttons -->
+                                <!-- Modal -->
+                                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="confirmModalLabel">Delete this user?</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>This user account will be permanently deleted from the database.</p>
+                                                <p>This <b>cannot</b> be undone.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger" onclick="document.getElementById('deleteUserForm').submit();">
+                                                    Confirm
+                                                </button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>  
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
