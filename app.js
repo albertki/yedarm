@@ -24,7 +24,6 @@ const studentRoutes = require('./routes/students');
 const parentRoutes = require('./routes/parents');
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yedarm'
-// const dbUrl = 'mongodb://localhost:27017/yedarm'
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
