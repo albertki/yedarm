@@ -6,11 +6,44 @@
     <div class="col-6 offset-3">
 
         <!-- Edit Parent Info -->
-        <form action="/students/<%= studentId %>/parents?_method=PUT" method="POST" class="needs-validation"
-            id="parentForm" novalidate>
+        <form action="/students/<%= studentId %>/parents?_method=PUT" method="POST" class="needs-validation" id="parentForm" novalidate>
             <% let i = 1 %>
             <% for (let parent of parents) { %>
             <h3 class="text-center">Parent Contact <%= i++ %> </h3>
+            <div class="row mb-3 justify-content-md-center">
+
+                <div class="col-md-4">
+                    <label for="inputRelationship" class="form-label">Relationship to student</label>
+                    <select id="inputRelationship" name="<%= parent.id %>[relation][toStudent]" class="form-select" required>
+                        <option disabled selected value="">Choose...</option>
+                        <% for (let relation of relationsArray) { %>
+                            <option value="<%= relation %>" <%= parent.relation.toStudent == relation ? 'selected': '' %>>
+                                <%= relation %>
+                            </option>
+                        <% } %>
+                    </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter the relationship.</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputMarriage" class="form-label">Marriage status (optional)</label>
+                    <select id="inputMarriage" name="<%= parent.id %>[relation][marriageStatus]" class="form-select">
+                        <option disabled selected value="">Choose...</option>
+                        <option value="married" <%= parent.relation.marriageStatus == "married" ? 'selected': '' %>>
+                            married
+                        </option>
+                        <option value="divorced" <%= parent.relation.marriageStatus == "divorced" ? 'selected': '' %>>
+                            divorced
+                        </option>
+                        <option value="" <%= !parent.relation.marriageStatus ? 'selected': '' %>>
+                            n/a
+                        </option>
+                    </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter the relationship.</div>
+                </div>
+            </div>
+        <!-- Edit Parent full name -->
             <div class="row my-3">
                 <div class="col">
                     <div class="form-floating">

@@ -1,5 +1,5 @@
 const Student = require('../models/student');
-const { Parent, statesArray } = require('../models/parent');
+const { Parent, statesArray, relationsArray } = require('../models/parent');
 const ExpressError = require('../utils/ExpressError');
 
 module.exports.renderNewParentForm = async (req, res) => {
@@ -8,7 +8,7 @@ module.exports.renderNewParentForm = async (req, res) => {
     
     const parents = student.parents;
     
-    res.render('parents/new', { studentId, statesArray, parents });
+    res.render('parents/new', { studentId, statesArray, relationsArray, parents });
 }
 
 module.exports.createParent = async (req, res) => {
@@ -38,7 +38,7 @@ module.exports.renderEditParentForm = async (req, res) => {
     if (parents.length == 0) {
         throw new ExpressError('Parent Information Not Found', 404);
     }
-    res.render('parents/edit', { studentId, parents, statesArray });
+    res.render('parents/edit', { studentId, parents, statesArray, relationsArray });
 }
 
 module.exports.updateParent = async (req, res) => {

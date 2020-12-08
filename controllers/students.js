@@ -1,5 +1,5 @@
 const Student = require('../models/student');
-const { Parent, statesArray } = require('../models/parent');
+const { Parent, statesArray, relationsArray } = require('../models/parent');
 const ExpressError = require('../utils/ExpressError');
 const { cloudinary } = require('../cloudinary')
 
@@ -13,7 +13,7 @@ module.exports.index = async (req, res) => {
 }
 
 module.exports.renderNewStudentForm = (req, res) => {
-    res.render('students/new', { statesArray });
+    res.render('students/new', { statesArray, relationsArray });
 }
 
 module.exports.createStudent = async (req, res) => {

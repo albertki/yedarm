@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const { login } = require('../controllers/users');
 const { Schema } = mongoose;
 
-const statesArray = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
-
+// const statesArray = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
+const statesArray = ["VA", "MD", "DC"];
+const relationsArray = ["Mother", "Father", "Aunt", "Uncle", "Grandmother", "Grandfather"]
 // Declare the Schema of the Mongo model
 var parentSchema = new Schema({
     name: {
@@ -60,6 +61,20 @@ var parentSchema = new Schema({
     kcpcMember: {
         type: Boolean,
         default: false
+    },
+    relation: {
+        toStudent: {
+            type: String,
+            enum: relationsArray,
+            required: [true, 'relationship cannot be blank']
+        },
+        marriageStatus: {
+            type: String,
+            enum: ["married", "divorced"]
+        }
+    },
+    notes: {
+        type: String
     }
     // // TODO: choice to add multiple students/children
     // student: {
@@ -102,4 +117,5 @@ const Parent = mongoose.model('Parent', parentSchema);
 
 const x = async () => await Parent.syncIndexes();
 module.exports.Parent = Parent;
-module.exports.statesArray = statesArray
+module.exports.statesArray = statesArray;
+module.exports.relationsArray = relationsArray;

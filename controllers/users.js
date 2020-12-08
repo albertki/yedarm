@@ -47,7 +47,7 @@ module.exports.changepassword = async (req, res) => {
     const foundUser = await User.findById(req.user._id);
     foundUser.changePassword(req.body.password, req.body.newPassword);
     console.log('password changed');
-    res.redirect('users/login');
+    res.redirect('login');
 }
 
 module.exports.sendForgotPasswordLink = async (req, res, next) => {

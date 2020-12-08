@@ -5,8 +5,42 @@
     <h1 class="text-center">Parent Contact</h1>
     <div class="col-6 offset-3">
 
+        
         <form action="/students/<%= studentId %>/parents/new" method="POST" class="needs-validation" id="parentForm" novalidate> 
             <!-- New Parent Info -->
+            <div class="row mb-3 justify-content-md-center">
+
+                <div class="col-md-4">
+                    <label for="inputRelationship" class="form-label">Relationship to student</label>
+                    <select id="inputRelationship" name="relation[toStudent]" class="form-select" required>
+                        <option disabled selected value="">Choose...</option>
+                        <% for (let relation of relationsArray) { %>
+                            <option value="<%= relation %>">
+                                <%= relation %>
+                            </option>
+                        <% } %>
+                    </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter the relationship.</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputMarriage" class="form-label">Marriage status (optional)</label>
+                    <select id="inputMarriage" name="relation[marriageStatus]" class="form-select">
+                        <option disabled selected value="">Choose...</option>
+                        <option value="married">
+                            Married
+                        </option>
+                        <option value="divorced">
+                            Divorced
+                        </option>
+                        <option value="">
+                            n/a
+                        </option>
+                    </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter the relationship.</div>
+                </div>
+            </div>
             <div class="row mb-3">
                 <div class="col">
                     <div class="form-floating">

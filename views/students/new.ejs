@@ -147,33 +147,76 @@
 
             
             <!-- New Parent Info -->
-            <div class="row my-3">
-                <div class="col">
-                    <h3 class="text-center">Parent Contact </h3>
+            <div class="row my-4">
+                <h3 class="text-center">Parent Contact </h3>
+            </div>
+            <div class="row mb-3 justify-content-md-center">
 
+                <div class="col-md-4">
+                    <label for="inputRelationship" class="form-label">Relationship to student</label>
+                    <select id="inputRelationship" name="parent[relation][toStudent]" class="form-select" required>
+                        <option disabled selected value="">Choose...</option>
+                        <% for (let relation of relationsArray) { %>
+                            <option value="<%= relation %>">
+                                <%= relation %>
+                            </option>
+                        <% } %>
+                    </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter the relationship.</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputMarriage" class="form-label">Marriage status (optional)</label>
+                    <select id="inputMarriage" name="parent[relation][marriageStatus]" class="form-select">
+                        <option disabled selected value="">Choose...</option>
+                        <option value="married">
+                            Married
+                        </option>
+                        <option value="divorced">
+                            Divorced
+                        </option>
+                        <option value="">
+                            n/a
+                        </option>
+                    </select>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter the relationship.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md">
                     <div class="form-floating">
                         <input type="text" name="parent[name]" id="parentName" class="form-control" placeholder="Full name" required>
-                        <label for="parentName" class="form-label">Primary Parent Name</label>
+                        <label for="parentName" class="form-label">Primary Parent Full Name</label>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a name.</div>
                     </div>
                 </div>
             </div>
+            
             <div class="row mb-3">
-                <div class="col">
+                <div class="col-md">
+                <!-- <div class="col-md-5 col-xl"> -->
                     <div class="form-floating mb-3">
                         <input type="email" name="parent[email]" id="parentEmail" class="form-control" placeholder="name@example.com" required>
-                        <label for="parentEmail" class="form-label">Primary Parent Email</label>
+                        <label for="parentEmail" class="form-label">Primary Parent Email </label>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a valid email.</div>
                     </div>
+                </div>
+            </div>
+            <div class="row mb-3">
 
-                    <label for="parentPhone" class="form-label">Primary Parent Phone</label>
-                    <input type="tel" name="parent[phone]" id="parentPhone" class="form-control"
-                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" minLength=12 maxLength=12 required>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a valid phone number <i>(i.e. 123-456-7890)</i></div>
-                    <small id="contactHelp" class="form-text text-muted">We'll never share the above information with anyone else.</small>
+                <div class="col-md">
+                <!-- <div class="col-8 col-xxl-7"> -->
+                    <div class="form-floating mb-3">
+                        <label for="parentPhone" class="form-label">Primary Parent Phone <i>(i.e. 123-456-7890)</i></label>
+                        <input type="tel" name="parent[phone]" id="parentPhone" class="form-control"
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" minLength=12 maxLength=12 required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid phone number <i>(i.e. 123-456-7890)</i></div>
+                        <small id="contactHelp" class="form-text text-muted">We'll never share the above information with anyone else.</small>
+                    </div>
                 </div>
             </div>
             <div class="row justify-content-md-center">
@@ -220,6 +263,7 @@
                     anyone else. This information is for emergency contact purposes only.</small>
             
             </div>
+            
             <div class="row mb-4 justify-content-md-center">
                 <div class="col-md-auto text-center">
                     <button type="submit" class="btn btn-success btn-lg" style="background-color: #28a745; border-color: #28a745;">Submit</button>
