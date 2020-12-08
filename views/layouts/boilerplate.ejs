@@ -30,12 +30,18 @@
     <script src="/scripts/validateForms.js"></script>
     <script>
         $(document).ready( function () {
-            $('#studentTable').DataTable({
+            $('.datatable').DataTable({
                 paging: false,
                 columnDefs: [
                     // { targets: [0], orderable: false}
                 ]
             });
+            // $('#parentTable').DataTable({
+            //     paging: false,
+            //     columnDefs: [
+            //         // { targets: [0], orderable: false}
+            //     ]
+            // });
         } );
     </script>
     <script>

@@ -92,6 +92,7 @@ module.exports.sendForgotPasswordLink = async (req, res, next) => {
                 'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             };
             smtpTransport.sendMail(mailOptions, function(err) {
+                console.log('mail sent');
                 req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
                 done(err, 'done');
             });

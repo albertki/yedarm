@@ -159,8 +159,7 @@
 <br><br>
 <h4>Parent Contact</h4>
 <% if (student.parents.length != 0) {%>
-
-    <table class="table table-hover">
+    <table class="table table-hover datatable">
         <thead>
             <tr>
             <!-- <th scope="col">#</th> -->
@@ -177,7 +176,7 @@
                 <tr>
                     <td><%= parent.name %></td>
                     <td><%= parent.email %></td>
-                    <td><%= parent.phoneNumber %></td>
+                    <td><%= parent.phone %></td>
                     <td><%= parent.addressFull %></td>
                     <td><%= parent.kcpcMember ? "Yes" : "No" %></td>
                     <td>
@@ -227,3 +226,8 @@
     <!-- <a href="/">Back to Home</a> -->
 </div>
 <br><br>
+<style>
+    .dataTables_info {
+        margin-bottom: 1rem;
+    }
+</style>

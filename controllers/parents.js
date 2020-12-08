@@ -4,19 +4,25 @@ const ExpressError = require('../utils/ExpressError');
 
 module.exports.renderNewParentForm = async (req, res) => {
     const studentId = req.params.id;
-    await Student.findById(studentId);
-    res.render('parents/new', { studentId, statesArray });
+    const student = await Student.findById(studentId).populate('parents');
+    
+    const parents = student.parents;
+    
+    res.render('parents/new', { studentId, statesArray, parents });
 }
 
 module.exports.createParent = async (req, res) => {
     const studentId = req.params.id;
     const student = await Student.findById(studentId);
+    console.log(req.body);
+    if (req.body.otherParentId) {
+        const otherParent = await Parent.findById(req.body.otherParentId);
+        req.body.address = otherParent.address;
+    }
     const newParent = new Parent(req.body);
-    // console.log(newParent);
     student.parents.push(newParent);
     await newParent.save();
     await student.save();
-    console.log(student);
     
     req.flash('success', "Successfully added student's parent!");
     res.redirect(`/students/${studentId}`);

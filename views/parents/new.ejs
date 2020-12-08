@@ -20,32 +20,44 @@
             <div class="row mb-3">
                 <div class="form-group">
                     <div class="form-floating mb-3">
-                        <input type="email" name="email" id="parentEmail" class="form-control" placeholder="name@example.com" required>
+                        <input type="email" name="email" id="parentEmail" class="form-control" placeholder="name@example.com">
                         <label for="parentEmail" class="form-label">Parent Email</label>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a valid email.</div>
                     </div>
 
                     <label for="parentPhone" class="form-label">Parent Phone</label>
-                    <input type="number" name="phone" id="parentPhone" class="form-control" placeholder="(123) 456 7890" required>
+                    <input type="tel" name="phone" id="parentPhone" class="form-control"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" minLength=12 maxLength=12>
                     <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please enter a valid phone number</div>
+                    <div class="invalid-feedback">Please enter a valid phone number <i>(i.e. 123-456-7890)</i></div>
                 </div>
             </div>
             <div class="row g-3 mb-3">
-
                 <div class="col-12">
-                    <label for="inputStreetAddress" class="form-label">Address</label>
+                    <label for="otherParentId" class="form-label">Use existing parent address</label>
+                    <select id="otherParentId" name="otherParentId" class="form-select">
+                        <option disabled value="" selected>Choose...</option>
+                        <option value="">No</option>
+                        <% for (let parent of parents) { %>
+                            <option value="<%= parent._id %>">
+                                <%= parent.name %>
+                            </option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label for="inputStreetAddress" class="form-label">Street Address</label>
                     <input type="text" name="address[street]" class="form-control" id="inputStreetAddress"
-                        placeholder="1234 Main St" required>
+                        placeholder="1234 Main St">
                 </div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">City</label>
-                    <input type="text" name="address[city]" class="form-control" id="inputCity" required>
+                    <input type="text" name="address[city]" class="form-control" id="inputCity">
                 </div>
                 <div class="col-md-4">
                     <label for="inputState" class="form-label">State</label>
-                    <select id="inputState" name="address[state]" class="form-select" required>
+                    <select id="inputState" name="address[state]" class="form-select">
                         <option disabled selected value="">Choose...</option>
                         <% for (let state of statesArray) { %>
                             <option value="<%= state %>">
@@ -59,7 +71,7 @@
                 <div class="col-md-2">
                     <label for="inputZip" class="form-label">Zip</label>
                     <input type="text" name="address[zip]" class="form-control" id="inputZip"
-                        maxlength="5" required>
+                        maxlength="5">
                 </div>
                 <small id="contactHelp" class="form-text text-muted">We'll never share your contact information with
                     anyone else. This information is for emergency contact purposes only.</small>
@@ -75,7 +87,11 @@
                     <label for="kcpcMemberfalse" class="radio-inline">No</label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success" style="background-color: #28a745; border-color: #28a745;">Submit</button>
+            <div class="row mb-4 justify-content-md-center">
+                <div class="col-md-auto text-center">
+                    <button type="submit" class="btn btn-success" style="background-color: #28a745; border-color: #28a745;">Submit</button>
+                </div>
+            </div>
         </form>
 
         <br><br>

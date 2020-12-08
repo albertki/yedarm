@@ -26,28 +26,29 @@ var parentSchema = new Schema({
         street: String,
         city: {
             type: String,
-            required: true
+            // required: true
         },
         state: {
             type: String,
             uppercase: true,
             enum: statesArray,
-            required: true
+            // required: true
         },
         zip: {
             type: String,
-            minlength: 5, maxlength: 5,
-            required: true
+            // minlength: 5, 
+            maxlength: 5,
+            // required: true
         }
     },
     email: {
         type: String,
-        required: [true, 'email cannot be blank'],
+        // required: [true, 'email cannot be blank'],
         // unique: true,
     },
     phone: {
         type: String,
-        required: [true, 'phone cannot be blank'],
+        // required: [true, 'phone cannot be blank'],
         // unique: true
         // validate: {
         //     validator: function(v) {
@@ -79,18 +80,18 @@ var parentSchema = new Schema({
 
 parentSchema.virtual('addressFull')
     .get(function() {
-        if ('address' in this) {
+        if ('address' in this && this.address.street && this.address.city && this.address.state) {
             return `${this.address.street}, ${this.address.city}, ${this.address.state}`;
         }
         return '';
     })
 
-parentSchema.virtual('phoneNumber')
-    .get(function() {
-        const cleaned = ('' + this.phone).replace(/\D/g, '')
-        const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
-        return '(' + match[1] + ') ' + match[2] + '-' + match[3]
-    })
+// parentSchema.virtual('phoneNumber')
+//     .get(function() {
+//         const cleaned = ('' + this.phone).replace(/\D/g, '')
+//         const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+//         return '(' + match[1] + ') ' + match[2] + '-' + match[3]
+//     })
     // .set(function(v) {
     //     this.name.firstName = v.substr(0, v.indexOf(' '));
     //     this.name.lastName = v.substr(v.indexOf(' ') + 1);

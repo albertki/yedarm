@@ -54,7 +54,7 @@ const seedDB = async () => {
         name: 'Diana Kim',
         birthday: `1948-${Math.floor(Math.random() * (12 - 1) + 1)}-${Math.floor(Math.random() * (30 - 1) + 1)}`,
         email: emails[0],
-        phone: String(randomPhone),
+        phone: "111-222-2222",
         address: {
             street: "124 Main St",
             city: "Fairfax",
@@ -66,7 +66,7 @@ const seedDB = async () => {
         name: 'Dong Kim',
         birthday: `1938-${Math.floor(Math.random() * (12 - 1) + 1)}-${Math.floor(Math.random() * (30 - 1) + 1)}`,
         email: emails[3],
-        phone: "1234445967",
+        phone: "123-444-5967",
         address: {
             street: "124 Main St",
             city: "Fairfax",

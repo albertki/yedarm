@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Parent = require('./parent');
+const { Parent } = require('./parent');
 const { Schema } = mongoose;
 
 // Declare the Schema of the Mongo model
@@ -129,11 +129,9 @@ studentSchema.virtual('comprehensionKor')
     })
 
 
-studentSchema.post('findOneAndDelete', async function(student) {
-    // console.log('POST-DELETE!!');
+studentSchema.post('findOneAndDelete', async (student) => {
     // Deletes Parent(s) if the Student deleted
-    // TODO: But what if a Parent has multiple Students?
-    if (student.parents.length != 0) {
+    if (student.parents && student.parents.length != 0) {
         await Parent.deleteMany({ _id: {$in: student.parents} })
     }
 })
