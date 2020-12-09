@@ -210,9 +210,8 @@
                 <div class="col-md">
                 <!-- <div class="col-8 col-xxl-7"> -->
                     <div class="form-floating mb-3">
+                        <input type="tel" name="parent[phone]" id="parentPhone" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" minLength=12 maxLength=12 required>
                         <label for="parentPhone" class="form-label">Primary Parent Phone <i>(i.e. 123-456-7890)</i></label>
-                        <input type="tel" name="parent[phone]" id="parentPhone" class="form-control"
-                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" minLength=12 maxLength=12 required>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a valid phone number <i>(i.e. 123-456-7890)</i></div>
                         <small id="contactHelp" class="form-text text-muted">We'll never share the above information with anyone else.</small>

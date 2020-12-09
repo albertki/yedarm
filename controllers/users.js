@@ -40,7 +40,10 @@ module.exports.login = (req, res) => {
 module.exports.logout = (req, res) => {
     req.logout();
     req.flash('success', 'Goodbye!');
-    res.redirect('login')
+    req.session.destroy(function (err) {
+        res.redirect('login'); //Inside a callback… bulletproof!
+    });
+    // res.redirect('login')
 }
 
 module.exports.changepassword = async (req, res) => {
