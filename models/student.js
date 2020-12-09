@@ -89,6 +89,12 @@ studentSchema.virtual('fullName')
         this.name.firstName = v.substr(0, v.indexOf(' '));
         this.name.lastName = v.substr(v.indexOf(' ') + 1);
     });
+studentSchema.virtual('yedarmMemberDateMY')
+    .get(function() {
+        if (this.yedarmMemberDate)
+            return ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2) + '-' + this.yedarmMemberDate.getFullYear();
+        return
+    })
 studentSchema.virtual('yedarmMemberDateMDY')
     .get(function() {
         if (this.yedarmMemberDate)

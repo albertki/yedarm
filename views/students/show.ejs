@@ -1,28 +1,70 @@
 <% layout('layouts/boilerplate') %> 
-
-<h5>Student Profile </h5>
-<br>
-<div class="row">
-
-
-    <div class="col-6">
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 0 5px;
+        width: 100%;
+    }
+    .basicInfo th {
+        color: dodgerblue;
+        padding-right: 1rem;
+        font-size: 1.1rem;
+    }
+    .behavInfo th {
+        color: dodgerblue;
+        /* padding-right: .5rem; */
+        font-size: 1.3rem;
+    }
+    /* .a {
+        word-break: break-word;
+        width: 300px; 
+        overflow: hidden;
+    } */
+    .behavInfo tr {
+        font-size: 1.1rem;
+        width: 100%;
+    }
+</style>
+<div class="row justify-content-md-center">
+    
+    <div class="col-5">
+        <h5>Student Profile </h5>
+        <br>
 
         <h2><%= student.fullName  %></h2>
         <% if (student.name.koreanName) { %>
             <h3><%= student.name.koreanName  %></h3>
         <% } %> 
-        <h6>Gender: <%= student.gender %></h6>
-            <!-- <% if (student.gender === 'male') { %> 
-                <i class="fas fa-male"></i>
-            <% } else { %> 
-                <i class="fas fa-female"></i>
-            <% } %>  -->
-        <h6>Age: <%= calculateAge(student.birthdayMDY) %></h6>
-        <h6>Birthday: <%= student.birthdayMDY %></h6>
-        <h6>School: <%= student.school %></h6>
-        <h6>Yedarm Member Since: <%= student.yedarmMemberDateMDY %></h6>
+        <hr>
+        <h5 class="text-muted mb-4">Basic Information</h5>
+        <div class="basicInfo">
+            <table>
+                <tr>
+                    <th>Gender:</th>
+                    <td><%= student.gender %></td>
+                </tr>
+                <tr>
+                    <th>Age:</th>
+                    <td><%= calculateAge(student.birthdayMDY) %></td>
+                </tr>
+                <tr>
+                    <th>Birthday:</th>
+                    <td><%= student.birthdayMDY %></td>
+                </tr>
+                <tr>
+                    <th>School:</th>
+                    <td><%= student.school %></td>
+                </tr>
+                <tr>
+                    <th>Yedarm Member Since:</th>
+                    <td><%= student.yedarmMemberDateMY %></td>
+                </tr>
+            </table>
+        </div>
         <br><br>
-        <h4>Medical Information:</h4>
+        <hr>
+
+        <h4 class="text-muted mb-4">Medical Information</h4>
         <% if (student.medicalInfo) {%> 
             <ul>
                 <% for (line of student.medicalInfo.split('\n')) { %> 
@@ -33,128 +75,150 @@
         <br>
 
     </div>
-
-
+    <div class="col-1"></div>
     <div class="col-6">
-        <% if (student.image.url) { %> 
-            <div class="row mb-3">
-                <div class="col-7">
+        <div class="row mb-3 justify-content-md-center">
+            <div class="col" style="text-align: center;">
+                <% if (student.image.url) { %> 
                     <img src="<%= student.image.url %> " width="200vh" alt="studentImage">
-                </div>
-            </div>
-        <% } else { %> 
-            <div class="row mb-3">
-                <div class="col-7">
+                <% } else { %> 
                     <img src="<%= "https://res.cloudinary.com/de7x3ykky/image/upload/v1607293003/yedarm/default_profile_pic.png" %> " width="200vh" alt="studentImage">
-                </div>
+                    <% } %> 
             </div>
-        <% } %> 
+        </div>
         <!-- <img src="/imgs/sample.jpg" class="py-4" alt=""> -->
         <!-- <p>this is the student profile picture</p> -->
-        <h3>Behavioral Information</h3>
-        <div class="row">
-            <div class="col-sm">
-                <h5>English: <%= student.behavioral.comprehension.english %> </h5>
-            <!-- </div> -->
-            <!-- <div class="col-1"> -->
-            </div>
-            <div class="col-sm">
-                <h5>Korean: <%= student.behavioral.comprehension.korean  %></h5>
-            <!-- </div> -->
-            <!-- <div class="col"> -->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <h5>Likes:</h5>
-                <% if (student.behavioral.likes) {%> 
-                    <ul>
-                        <% for (line of student.behavioral.likes.split('\n')) { %> 
-                            <li><%= line.replace('\u2022', '') %> </li>
+        <hr>
+        <h3 class="text-muted mb-4">Behavioral Information</h3>
+        <div class="behavInfo">
+            <table class="table table-borderless">
+                <tr>
+                    <th>
+                        English:
+                    </th>
+                    <td>
+                        <%= student.behavioral.comprehension.english %>
+                    </td>
+                    <th>
+                        Korean:
+                    </th>
+                    <td>
+                        <%= student.behavioral.comprehension.korean %>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2">Likes:</th>
+                    <th colspan="2">Dislikes:</th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <% if (student.behavioral.likes) {%> 
+                            <ul>
+                                <% for (line of student.behavioral.likes.split('\n')) { %> 
+                                    <li><%= line.replace('\u2022', '') %> </li>
+                                <% } %>
+                            </ul>
+                        <% } %> 
+                    </td>
+                    <td colspan="2">
+                        <% if (student.behavioral.dislikes) {%> 
+                            <ul>
+                                <% for (line of student.behavioral.dislikes.split('\n')) { %> 
+                                    <li><%= line.replace('\u2022', '') %> </li>
+                                <% } %>
+                            </ul>
+                        <% } %> 
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">
+                        Needs:
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <% if (student.behavioral.needs) {%> 
+                            <ul>
+                                <% for (line of student.behavioral.needs.split('\n')) { %> 
+                                    <li><%= line.replace('\u2022', '') %> </li>
+                                <% } %>
+                            </ul>
                         <% } %>
-                    </ul>
-                <% } %> 
-            </div>
-            <div class="col-sm">
-                <h5>Dislikes:</h5>
-                <% if (student.behavioral.dislikes) {%> 
-                    <ul>
-                        <% for (line of student.behavioral.dislikes.split('\n')) { %> 
-                            <li><%= line.replace('\u2022', '') %> </li>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">
+                        Calming methods:
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <% if (student.behavioral.pacification) {%> 
+                            <ul>
+                                <% for (line of student.behavioral.pacification.split('\n')) { %> 
+                                    <li><%= line.replace('\u2022', '') %> </li>
+                                <% } %>
+                            </ul>
                         <% } %>
-                    </ul>
-                <% } %> 
-            </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4">Incidents:</th>
+                </tr>
+                <tr>
+                    <td>
+                        <% if (student.incidents.length != 0) {%> 
+                            <ul>
+                                <% for (incident of student.incidents) { %> 
+                                    <li><%= incident %> </li>
+                                <% } %> 
+                            </ul>
+                        <% } %> 
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div class="row">
-            <div class="col-auto">
-                <h5>Needs:</h5>
-                <% if (student.behavioral.needs) {%> 
-                    <ul>
-                        <% for (line of student.behavioral.needs.split('\n')) { %> 
-                            <li><%= line.replace('\u2022', '') %> </li>
-                        <% } %>
-                    </ul>
-                <% } %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-auto">
-                <h5>Pacification:</h5>
-                <% if (student.behavioral.pacification) {%> 
-                    <ul>
-                        <% for (line of student.behavioral.pacification.split('\n')) { %> 
-                            <li><%= line.replace('\u2022', '') %> </li>
-                        <% } %>
-                    </ul>
-                <% } %>
-            </div>
-        </div>
-        <h5>Incidents:</h5>
-        <% if (student.incidents.length != 0) {%> 
-            <ul>
-                <% for (incident of student.incidents) { %> 
-                    <li><%= incident %> </li>
-                <% } %> 
-            </ul>
-        <% } %> 
         <br>
     
     </div>
 
 </div>
 
-
-<input type="button" class="btn btn btn-info" onclick="location.href='/students/<%= student._id %>/edit'" value="Edit Student" />
-<form class="d-inline" id="deleteStudentForm" action="/students/<%= student._id %>?_method=DELETE" method="POST">
-    <!-- Button trigger modal -->
-    <button type="submit" class="btn btn btn-danger" onclick="event.preventDefault();" data-toggle="modal" data-target="#confirmModal">
-        Delete
-    </button>
-    <!-- Confirmation/Cancel buttons -->
-    <!-- Modal -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Delete this student?</h5>
-                </div>
-                <div class="modal-body">
-                    <p>This student will be permanently deleted from the database.</p>
-                    <p>This <b>cannot</b> be undone.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" onclick="document.getElementById('deleteStudentForm').submit();">
-                        Confirm
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Cancel
-                    </button>
+<div class="row">
+    <div class="col">
+        <input type="button" class="btn btn btn-info" onclick="location.href='/students/<%= student._id %>/edit'" value="Edit Student" />
+        <form class="d-inline" id="deleteStudentForm" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+            <!-- Button trigger modal -->
+            <button type="submit" class="btn btn btn-danger" onclick="event.preventDefault();" data-toggle="modal" data-target="#confirmModal">
+                Delete
+            </button>
+            <!-- Confirmation/Cancel buttons -->
+            <!-- Modal -->
+            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmModalLabel">Delete this student?</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>This student will be permanently deleted from the database.</p>
+                            <p>This <b>cannot</b> be undone.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger" onclick="document.getElementById('deleteStudentForm').submit();">
+                                Confirm
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+
     </div>
-</form>
+</div>
 
 <br><br>
 <h4>Parent Contact</h4>
