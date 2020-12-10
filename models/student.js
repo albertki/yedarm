@@ -95,16 +95,21 @@ studentSchema.virtual('yedarmMemberDateMY')
             return ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2) + '-' + this.yedarmMemberDate.getFullYear();
         return
     })
-studentSchema.virtual('yedarmMemberDateMDY')
+// studentSchema.virtual('yedarmMemberDateMDY')
+//     .get(function() {
+//         if (this.yedarmMemberDate)
+//             return ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.yedarmMemberDate.getDate()).slice(-2) + '-' + this.yedarmMemberDate.getFullYear();
+//         return
+//     })
+// studentSchema.virtual('yedarmMemberDateYMD')
+//     .get(function() {
+//         if (this.yedarmMemberDate)
+//             return  this.yedarmMemberDate.getFullYear() + '-' + ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.yedarmMemberDate.getDate()).slice(-2);
+//     })
+studentSchema.virtual('yedarmMemberDateYM')
     .get(function() {
         if (this.yedarmMemberDate)
-            return ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.yedarmMemberDate.getDate()).slice(-2) + '-' + this.yedarmMemberDate.getFullYear();
-        return
-    })
-studentSchema.virtual('yedarmMemberDateYMD')
-    .get(function() {
-        if (this.yedarmMemberDate)
-            return  this.yedarmMemberDate.getFullYear() + '-' + ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2) + '-' + ('0' + this.yedarmMemberDate.getDate()).slice(-2);
+            return  this.yedarmMemberDate.getFullYear() + '-' + ('0' + (this.yedarmMemberDate.getMonth()+1)).slice(-2);
     })
 studentSchema.virtual('birthdayMDY')
     .get(function() {
