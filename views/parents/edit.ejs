@@ -66,7 +66,7 @@
                     </div>
                     <div class="form-floating mb-3">
                         <input type="tel" name="<%= parent._id %>[phone]" id="parentPhone" class="form-control"
-                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value=<%= parent.phone %> placeholder="123-456-7890" minLength=12 maxLength=12>
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="<%= parent.phone %>" placeholder="123-456-7890" minLength=12 maxLength=12>
                         <label for="parentPhone">Parent Phone</label>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">Please enter a valid phone number <i>(i.e. 123-456-7890)</i></div>
