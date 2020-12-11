@@ -16,7 +16,7 @@ or, if you have `nodemon` installed:
 `nodemon app.js`  
 
   
- <br />
+ <br/>
 *I wrote and designed this web application from scratch for use by a local tutoring program for students with special needs. The site has proved to be of significant help for the program's administrators and offered ease of usage by the common end-user(s).*  
 
 *Please feel free to pull this project and re-design/re-implement, improve, and deploy this web application for your personal use!*
