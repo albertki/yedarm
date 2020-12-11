@@ -2,7 +2,8 @@
 
 Dynamic database website developed using Node.js, Mongoose, and MongoDB. Authentication and authorization integrated using Passport.js.
 
-Images are stored and managed on Cloudinary. Data for students, parents, and users are stored and managed using MongoDB Atlas. Accounts for both services can be created free of charge.
+Images are stored and managed on Cloudinary. Data for students, parents, and users are stored and managed using MongoDB Atlas. 
+*Accounts for both services can be created free of charge.*
 
 Prior to running this application, please make sure the required node packages are installed:
 From the root directory:
